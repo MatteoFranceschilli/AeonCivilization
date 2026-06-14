@@ -1,0 +1,2750 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÆON — Ascesa delle Civiltà</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Orbitron:wght@500;600;700;800&display=swap');
+
+  /* ===== TEMA: Pergamena (default) ===== */
+  :root, [data-theme="parchment"] {
+    --ink: #1a1410;
+    --parch: #e8dcc0;
+    --parch-dk: #d4c4a0;
+    --gold: #b8893a;
+    --gold-lt: #d9a94e;
+    --rust: #8a4b2e;
+    --moss: #5a6e3f;
+    --deep: #2b2118;
+    --panel: #f2e9d4;
+    --line: #b3a17a;
+    --shadow: rgba(26,20,16,0.35);
+    --font-display: 'Cinzel', serif;
+    --font-body: 'Spectral', serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --bg: radial-gradient(ellipse at top, #3a2e22 0%, #251c14 60%, #1a130d 100%);
+    --tint: rgba(255,255,255,0.3);
+    --tint-hi: rgba(255,255,255,0.55);
+    --on-accent: #2b1d0c;
+    --tab-ink: #2b2118;
+    --tab-bg: #cdbb92;
+    --cat-bg: linear-gradient(180deg, #8a4b2e, #6e3a22);
+    --cat-ink: #d9a94e;
+    --cat-sub: #e8dcc0;
+    --nav-ink: #c9b88f;
+  }
+
+  /* ===== TEMA: Moderno (palette attuale, stile pulito) ===== */
+  [data-theme="modern"] {
+    --ink: #e8ecf4;          /* testo chiaro su fondo scuro */
+    --parch: #1e2433;        /* "pergamena" -> superficie scura */
+    --parch-dk: #161b27;
+    --gold: #6366f1;         /* indaco/viola come accento primario */
+    --gold-lt: #818cf8;
+    --rust: #22d3ee;         /* ciano come accento secondario */
+    --moss: #34d399;         /* verde menta per i valori positivi */
+    --deep: #aab4c8;         /* testo secondario tenue */
+    --panel: #232b3d;        /* pannelli */
+    --line: #364154;         /* bordi */
+    --shadow: rgba(0,0,0,0.45);
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --bg: radial-gradient(ellipse at top, #1b2233 0%, #11161f 55%, #0a0d14 100%);
+    --tint: rgba(255,255,255,0.04);
+    --tint-hi: rgba(255,255,255,0.09);
+    --on-accent: #0b0f1a;
+    --tab-ink: #eef1f7;
+    --tab-bg: #2d3850;
+    --cat-bg: linear-gradient(180deg, #2f3a52, #232d42);
+    --cat-ink: #818cf8;
+    --cat-sub: #aab4c8;
+    --nav-ink: #c5cde0;
+  }
+
+  /* ===== TEMA: Nebulosa Porpora (spaziale) ===== */
+  [data-theme="nebula"] {
+    --ink: #f0e8fb;          /* testo chiaro lilla */
+    --parch: #241537;        /* superficie viola scuro */
+    --parch-dk: #190d28;
+    --gold: #a855f7;         /* porpora come accento primario */
+    --gold-lt: #c879ff;      /* porpora chiaro luminoso */
+    --rust: #ec4899;         /* magenta come accento secondario */
+    --moss: #4ade80;         /* verde brillante per i valori positivi */
+    --deep: #b9a8d4;         /* testo secondario tenue */
+    --panel: #2d1b45;        /* pannelli */
+    --line: #4a2f6b;         /* bordi */
+    --shadow: rgba(40,5,60,0.6);
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --bg: radial-gradient(ellipse at top, #3a1d5c 0%, #1d0f33 55%, #0d0618 100%);
+    --tint: rgba(200,121,255,0.06);
+    --tint-hi: rgba(200,121,255,0.12);
+    --on-accent: #1a0625;
+    --tab-ink: #f0e8fb;
+    --tab-bg: #3a2456;
+    --cat-bg: linear-gradient(180deg, #3a2456, #2a1840);
+    --cat-ink: #c879ff;
+    --cat-sub: #b9a8d4;
+    --nav-ink: #d8c5f0;
+  }
+
+  /* ===== TEMA: Aurora Verde (spaziale) ===== */
+  [data-theme="aurora"] {
+    --ink: #e6fbf0;          /* testo chiaro verde-menta */
+    --parch: #0f2e26;        /* superficie verde-petrolio scuro */
+    --parch-dk: #0a211b;
+    --gold: #10b981;         /* smeraldo come accento primario */
+    --gold-lt: #34e89e;      /* verde acido luminoso */
+    --rust: #2dd4bf;         /* turchese come accento secondario */
+    --moss: #a3e635;         /* lime per i valori positivi */
+    --deep: #8fc4b2;         /* testo secondario tenue */
+    --panel: #143b30;        /* pannelli */
+    --line: #245a48;         /* bordi */
+    --shadow: rgba(0,30,20,0.6);
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --bg: radial-gradient(ellipse at top, #103d30 0%, #0a2820 55%, #04130d 100%);
+    --tint: rgba(52,232,158,0.06);
+    --tint-hi: rgba(52,232,158,0.12);
+    --on-accent: #042016;
+    --tab-ink: #e6fbf0;
+    --tab-bg: #1c4d3e;
+    --cat-bg: linear-gradient(180deg, #1c4d3e, #143b30);
+    --cat-ink: #34e89e;
+    --cat-sub: #8fc4b2;
+    --nav-ink: #b0e0cd;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    background-attachment: fixed;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 16px;
+    line-height: 1.5;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  .wrap { max-width: 680px; margin: 0 auto; padding-bottom: 76px; }
+
+  /* ---- Header ---- */
+  header {
+    text-align: center;
+    margin-bottom: 18px;
+    color: var(--parch);
+  }
+  header h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 46px);
+    letter-spacing: 0.18em;
+    color: var(--gold-lt);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+  header .tag {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold-lt);
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+  }
+
+  /* ---- Era banner ---- */
+  .era-banner {
+    background: linear-gradient(180deg, var(--panel), var(--parch));
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    padding: 14px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 20px var(--shadow);
+    position: relative;
+  }
+  .era-banner .era-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .era-name {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 22px; color: var(--rust); letter-spacing: 0.08em;
+  }
+  .era-num { font-family: var(--font-mono); font-size: 12px; color: var(--gold); }
+  .era-desc { font-style: italic; font-size: 13px; color: var(--deep); margin-top: 2px; }
+  .era-progress {
+    height: 10px; background: var(--parch-dk); border: 1px solid var(--line);
+    border-radius: 5px; margin-top: 10px; overflow: hidden;
+  }
+  .era-progress > div {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+    transition: width 0.4s ease;
+  }
+  .era-progress-label { font-family:var(--font-mono); font-size:11px; color:var(--deep); margin-top:4px; }
+  .era-progress-label .req-lead { margin-right:6px; }
+  .era-progress-label .req {
+    display:inline-flex; align-items:baseline; gap:3px;
+    margin-right:14px; white-space:nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .era-progress-label .req-cur {
+    display:inline-block; min-width:46px; text-align:right;
+    color:var(--rust); font-weight:600;
+  }
+  .era-progress-label .req-sep { color:var(--deep); opacity:0.6; }
+  .era-progress-label .req-max {
+    display:inline-block; min-width:46px; text-align:left;
+    color:var(--deep);
+  }
+  .era-progress-label .req.req-ok .req-cur { color:var(--moss); }
+
+  /* ---- Layout grid ---- */
+  .grid { display: block; }
+
+  .panel {
+    background: linear-gradient(180deg, var(--panel), var(--parch));
+    border: 2px solid var(--line);
+    border-radius: 4px;
+    padding: 16px;
+    box-shadow: 0 4px 14px var(--shadow);
+  }
+  .panel h2 {
+    font-family: var(--font-display); font-size: 15px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--rust); border-bottom: 1px solid var(--line);
+    padding-bottom: 6px; margin-bottom: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  /* ---- Resources ---- */
+  .res-list { display: flex; flex-direction: column; gap: 7px; }
+  .res {
+    display: grid; grid-template-columns: 1fr 120px 64px; align-items: center;
+    gap: 8px; padding: 5px 8px; border-radius: 3px;
+    background: var(--tint);
+  }
+  .res:hover { background: var(--tint-hi); }
+  .res .rname { font-weight: 500; display:flex; align-items:center; gap:6px; min-width:0; }
+  .res .ricon { width: 18px; text-align:center; flex:none; }
+  .res .rval {
+    font-family: var(--font-mono); font-weight: 600;
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  .res .rval .rcap { font-weight: 400; font-size: 11px; color: var(--deep); opacity: 0.6; }
+  .res .rval.rfull { color: var(--rust); }
+  .res .rval.rfull .rcap { color: var(--rust); opacity: 0.85; }
+  .res .rrate {
+    font-family: var(--font-mono); font-size: 11px;
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  .rrate.pos { color: var(--moss); }
+  .rrate.neg { color: var(--rust); }
+  .res-cat { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin:8px 0 2px; font-family:var(--font-display); }
+  .res-sub {
+    font-size:11px; font-family:var(--font-body); font-style:italic;
+    color:var(--deep); opacity:0.7; padding:2px 8px 4px 8px; margin-top:-3px;
+  }
+  .res-sub.warn { color:var(--rust); opacity:1; font-weight:600; font-style:normal; }
+
+  /* ---- Screen / view switching ---- */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* bottom navigation bar */
+  .bottom-nav {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    display: flex; background: linear-gradient(180deg, var(--deep), #1a130d);
+    border-top: 2px solid var(--gold);
+    box-shadow: 0 -4px 18px rgba(0,0,0,0.5);
+    padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+  }
+  .nav-btn {
+    flex: 1; background: transparent; color: var(--nav-ink);
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: 7px 2px 6px; font-family: var(--font-display); font-size: 10px;
+    letter-spacing: 0.04em; border-radius: 4px; position: relative;
+  }
+  .nav-btn .nicon { font-size: 19px; line-height: 1; }
+  .nav-btn.active { color: var(--gold-lt); background: rgba(184,137,58,0.14); }
+  .nav-btn.active::after {
+    content:''; position:absolute; top:0; left:18%; right:18%; height:2px;
+    background: var(--gold-lt); border-radius: 2px;
+  }
+  .nav-badge {
+    position:absolute; top:3px; right:50%; transform:translateX(16px);
+    background: var(--rust); color: var(--parch); font-size:8px;
+    width:7px; height:7px; border-radius:50%; display:none;
+  }
+  .nav-badge.show { display:block; }
+
+  /* ---- Buttons / actions ---- */
+  button {
+    font-family: var(--font-body); cursor: pointer; border: none;
+    transition: all 0.12s ease;
+  }
+  .gather-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .gather-btn {
+    background: linear-gradient(180deg, var(--gold-lt), var(--gold));
+    color: var(--on-accent); font-weight: 600; padding: 12px 8px; border-radius: 4px;
+    border: 1px solid var(--rust); font-size: 14px;
+    box-shadow: 0 2px 0 var(--rust); letter-spacing: 0.03em;
+  }
+  .gather-btn:hover { transform: translateY(-1px); box-shadow: 0 3px 2px var(--rust); }
+  .gather-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--rust); }
+  .gather-btn small { display:block; font-weight:400; font-size:11px; opacity:0.8; }
+
+  /* ---- Buildings / tech list ---- */
+  .item {
+    border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px;
+    margin-bottom: 8px; background: var(--tint);
+  }
+  .item.locked { opacity: 0.45; }
+  .item .ihead { display: flex; justify-content: space-between; align-items: baseline; gap:8px; }
+  .item .iname { font-weight: 600; font-family:var(--font-display); font-size:14px; letter-spacing:0.04em; }
+  .item .icount { font-family: var(--font-mono); font-size: 12px; color: var(--gold); }
+  .item .idesc { font-size: 12px; font-style: italic; color: var(--deep); margin: 3px 0 7px; }
+  .item .icost { font-family: var(--font-mono); font-size: 11.5px; color: var(--rust); }
+  .item .icost span.ok { color: var(--moss); }
+  /* ---- Gruppi di categoria edifici ---- */
+  .build-group { margin-bottom: 26px; }
+  .build-cat {
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    margin:0 0 12px; padding:0 2px 7px;
+    border-bottom: 2px solid var(--cat-ink);
+  }
+  .build-cat-label {
+    font-family:var(--font-display); font-size:17px; font-weight:700;
+    letter-spacing:0.08em; color:var(--cat-ink);
+  }
+  .build-cat-count {
+    font-family:var(--font-mono); font-size:11px; font-weight:600;
+    color:var(--on-accent); background:var(--cat-ink); border-radius:10px;
+    padding:1px 9px; flex:none;
+  }
+  .build-cat-desc {
+    font-size:11.5px; font-style:italic; color:var(--deep);
+    flex-basis:100%; margin-top:2px;
+  }
+  /* gli edifici del gruppo, con una sottile barra laterale nel colore della categoria */
+  .build-group .item {
+    margin-left:8px;
+    border-left:3px solid var(--cat-ink);
+  }
+  .buy-btn {
+    background: var(--moss); color: var(--parch); padding: 6px 14px;
+    border-radius: 3px; font-size: 13px; font-weight: 600; margin-top: 6px;
+    border: 1px solid #3f4d2c;
+  }
+  .buy-btn:hover { background: #6b8049; }
+  .buy-btn:disabled { background: #9a9580; cursor: not-allowed; opacity:0.7; }
+  .sell-btn {
+    background: var(--rust); color: var(--parch); padding: 6px 14px;
+    border-radius: 3px; font-size: 13px; font-weight: 600; margin-top: 6px;
+    margin-left: 6px; border: 1px solid #5e2f1a;
+  }
+  .sell-btn:hover { background: #a85c39; }
+  .sell-btn:disabled { background: #9a9580; cursor: not-allowed; opacity:0.7; }
+
+  /* ---- Workforce ---- */
+  .workforce-bar {
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+    flex-wrap:wrap; background: var(--deep); color: var(--parch);
+    border:1px solid var(--gold); border-radius:4px;
+    padding:8px 12px; margin-bottom:12px; font-size:13px;
+    font-variant-numeric: tabular-nums;
+  }
+  .workforce-bar b { color: var(--gold-lt); }
+  .workforce-bar b.wf-free { color: #9fc04f; }
+  .wf-auto {
+    background: var(--parch-dk); color: var(--deep); border:1px solid var(--line);
+    padding:4px 10px; border-radius:3px; font-size:11px; font-weight:600;
+    font-family:var(--font-display); letter-spacing:0.05em;
+  }
+  .wf-auto.on { background: var(--moss); color: var(--parch); border-color:#3f4d2c; }
+  .worker-row {
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+    flex-wrap:wrap; margin:6px 0 8px; padding:6px 8px;
+    background: rgba(43,33,24,0.07); border-radius:3px;
+  }
+  .worker-info { font-size:12.5px; font-family:var(--font-mono); }
+  .worker-info b { color: var(--rust); }
+  .worker-pct { color: var(--gold); font-size:11px; }
+  .worker-ctrls { display:flex; gap:4px; }
+  .wbtn {
+    background: var(--gold-lt); color:var(--on-accent); border:1px solid var(--rust);
+    width:30px; height:28px; border-radius:3px; font-weight:700; font-size:13px;
+    display:flex; align-items:center; justify-content:center; padding:0;
+  }
+  .wbtn[data-wmax] { width:auto; padding:0 8px; font-size:11px; font-family:var(--font-display); }
+  .wbtn:hover:not(:disabled) { background: var(--gold); }
+  .wbtn:disabled { background:#c3b896; opacity:0.55; cursor:default; border-color:var(--line); }
+
+  .craft-perworker, .craft-totals {
+    font-size:11.5px; font-family:var(--font-mono);
+    margin:4px 0; font-variant-numeric: tabular-nums;
+  }
+  .craft-perworker { color: var(--deep); }
+  .craft-totals { color: var(--deep); opacity:0.85; }
+  .cons { color: var(--rust); font-weight:600; }
+  .prod { color: var(--moss); font-weight:600; }
+
+  .tabs { display: flex; gap: 4px; margin-bottom: 12px; flex-wrap: wrap; }
+  .tab {
+    background: var(--tab-bg); color: var(--tab-ink); padding: 6px 14px;
+    border-radius: 3px 3px 0 0; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.06em; border: 1px solid var(--line); border-bottom: none;
+    font-family:var(--font-display);
+  }
+  .tab.active { background: var(--rust); color: var(--parch); }
+
+  /* ---- Log ---- */
+  #log {
+    max-height: 160px; overflow-y: auto; font-size: 12.5px;
+    border: 1px solid var(--line); border-radius: 3px; padding: 8px;
+    background: var(--tint); font-family:var(--font-body);
+  }
+  #log .e { padding: 2px 0; border-bottom: 1px dotted var(--line); }
+  #log .e.epic { color: var(--rust); font-weight:600; }
+  #log .e .t { font-family:var(--font-mono); font-size:10px; color:var(--gold); margin-right:6px; }
+
+  /* ---- Civ select overlay ---- */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(20,14,9,0.93);
+    z-index: 50; overflow-y: auto; padding: 24px;
+  }
+  .overlay h2 {
+    text-align: center; font-family:var(--font-display); color: var(--gold-lt);
+    font-size: 26px; letter-spacing: 0.12em; margin-bottom: 4px;
+  }
+  .overlay .sub { text-align:center; color: var(--parch-dk); font-style:italic; margin-bottom:20px; }
+  .civ-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; max-width: 1100px; margin: 0 auto; }
+  .civ-card {
+    background: linear-gradient(180deg, var(--panel), var(--parch));
+    border: 2px solid var(--line); border-radius: 5px; padding: 14px; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: all 0.15s;
+  }
+  .civ-card:hover { transform: translateY(-3px); border-color: var(--gold-lt); box-shadow: 0 8px 22px rgba(0,0,0,0.5); }
+  .civ-card .cn { font-family:var(--font-display); font-weight:700; font-size:17px; color:var(--rust); letter-spacing:0.05em; }
+  .civ-card .cf { font-style:italic; font-size:12px; color:var(--deep); margin:3px 0 8px; min-height:32px; }
+  .civ-card .cb { font-size:12px; color:var(--moss); } 
+  .civ-card .cm { font-size:12px; color:var(--rust); }
+  .civ-card .cstart { font-size:11px; font-family:var(--font-mono); color:var(--gold); margin-top:8px; }
+  .civ-card.selected { border-color: var(--gold-lt); box-shadow: 0 0 0 2px var(--gold-lt), 0 8px 22px rgba(0,0,0,0.5); transform: translateY(-3px); }
+
+  /* ---- Pannello nome civiltà ---- */
+  .name-panel {
+    display:none; max-width: 460px; margin: 20px auto 0;
+    background: linear-gradient(180deg, var(--panel), var(--parch));
+    border: 2px solid var(--gold); border-radius: 6px; padding: 18px 20px;
+    box-shadow: 0 8px 26px rgba(0,0,0,0.5); text-align:center;
+  }
+  .name-panel.show { display:block; }
+  .name-panel .name-prompt { font-family:var(--font-body); font-size:14px; color:var(--deep); margin-bottom:12px; }
+  .name-panel .name-prompt b { color:var(--rust); font-family:var(--font-display); letter-spacing:0.04em; }
+  .name-panel .name-label {
+    display:block; font-family:var(--font-display); font-size:11px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--gold); margin-bottom:6px;
+  }
+  .name-panel .name-input {
+    width:100%; font-family:var(--font-display); font-size:18px; font-weight:600;
+    text-align:center; color:var(--ink); padding:10px 12px; border-radius:4px;
+    border:1px solid var(--line); background: var(--tint-hi);
+    letter-spacing:0.03em; box-sizing:border-box;
+  }
+  .name-panel .name-input:focus { outline:none; border-color:var(--gold-lt); background:#fff; }
+  .name-panel .name-actions { display:flex; gap:8px; justify-content:center; margin-top:14px; flex-wrap:wrap; }
+  .name-panel .name-actions .gather-btn { max-width:240px; }
+
+  /* ---- Pannello account / login ---- */
+  .auth-panel {
+    max-width: 420px; margin: 0 auto;
+    background: linear-gradient(180deg, var(--panel), var(--parch));
+    border: 2px solid var(--gold); border-radius: 6px; padding: 20px;
+    box-shadow: 0 8px 26px var(--shadow);
+  }
+  .auth-label {
+    display:block; font-family:var(--font-display); font-size:11px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--gold); margin:10px 0 5px;
+  }
+  .auth-input {
+    width:100%; font-family:var(--font-body); font-size:15px;
+    color:var(--ink); padding:9px 12px; border-radius:4px;
+    border:1px solid var(--line); background: var(--tint-hi);
+    box-sizing:border-box;
+  }
+  .auth-input:focus { outline:none; border-color:var(--gold-lt); }
+  .auth-actions { display:flex; gap:8px; justify-content:center; margin-top:16px; flex-wrap:wrap; }
+  .auth-actions .gather-btn { max-width:200px; }
+  .auth-msg { font-size:12.5px; margin-top:10px; min-height:16px; text-align:center; }
+  .auth-msg.err { color:var(--rust); font-weight:600; }
+  .auth-msg.ok  { color:var(--moss); font-weight:600; }
+  .auth-note { font-size:11px; font-style:italic; color:var(--deep); opacity:0.75; text-align:center; margin-top:12px; }
+  .auth-logged-as { text-align:center; font-size:14px; color:var(--deep); line-height:1.6; }
+  .auth-logged-as b { color:var(--rust); font-family:var(--font-display); font-size:15px; }
+  .auth-config-intro { font-size:12.5px; color:var(--deep); line-height:1.5; margin-bottom:6px; }
+  .auth-link {
+    background:none; border:none; color:var(--gold); font-size:11.5px;
+    text-decoration:underline; font-family:var(--font-body); padding:2px;
+  }
+  .auth-link:hover { color:var(--gold-lt); }
+
+  /* ---- Save slots ---- */
+  .slots-list { max-width: 620px; margin: 0 auto; display:flex; flex-direction:column; gap:10px; }
+  .slot {
+    background: linear-gradient(180deg, var(--panel), var(--parch));
+    border: 2px solid var(--line); border-radius: 5px; padding: 14px 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  }
+  .slot.current { border-color: var(--gold-lt); }
+  .slot .sinfo { flex:1; min-width:160px; }
+  .slot .scn { font-family:var(--font-display); font-weight:700; font-size:16px; color:var(--rust); letter-spacing:0.04em; }
+  .slot .sera { font-size:12.5px; color:var(--deep); margin-top:2px; }
+  .slot .smeta { font-family:var(--font-mono); font-size:11px; color:var(--gold); margin-top:3px; }
+  .slot .scur-tag { font-size:10px; font-family:var(--font-display); letter-spacing:0.08em; color:var(--moss); font-weight:600; }
+  .slot .sactions { display:flex; gap:6px; flex-wrap:wrap; }
+  .slot-empty { text-align:center; color:var(--parch-dk); font-style:italic; padding:14px; }
+  .slot-load { background: var(--moss); color: var(--parch); padding:7px 16px; border-radius:3px; font-size:13px; font-weight:600; border:1px solid #3f4d2c; }
+  .slot-load:hover { background:#6b8049; }
+  .slot-load:disabled { background:#9a9580; opacity:0.7; cursor:default; }
+  .slot-del { background: var(--parch-dk); color:var(--rust); padding:7px 12px; border-radius:3px; font-size:13px; font-weight:600; border:1px solid var(--line); }
+  .slot-del:hover { background:var(--rust); color:var(--parch); }
+
+  .topbar { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:12px; flex-wrap:wrap; }  .civ-tag {
+    background: var(--rust); color: var(--parch); padding: 4px 12px; border-radius: 3px;
+    font-family:var(--font-display); font-size:13px; letter-spacing:0.08em; font-weight:600;
+  }
+  .ctrl-btns { display:flex; gap:6px; }
+  .mini-btn {
+    background: var(--parch-dk); border:1px solid var(--line); color:var(--deep);
+    padding: 5px 12px; border-radius: 3px; font-size: 12px; font-weight:600;
+  }
+  .mini-btn:hover { background: var(--gold-lt); }
+
+  .stat-row { display:flex; gap:10px; flex-wrap:wrap; font-size:13px; }
+  .stat-row .s {
+    font-family:var(--font-mono);
+    display:flex; align-items:baseline; gap:5px; white-space:nowrap;
+  }
+  .stat-row .s .lbl { color:var(--deep); }
+  .stat-row .s b {
+    color:var(--rust);
+    display:inline-block; text-align:right;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-row .s .num-pop { min-width:72px; }
+  .stat-row .s .num-cap { min-width:56px; text-align:left; }
+  .stat-row .s .num-occ { min-width:40px; text-align:left; }
+  .stat-row .s .num-free { min-width:40px; text-align:left; color:var(--moss); }
+  .stat-row .s .num-sci { min-width:72px; }
+
+  .pop-bar { font-size:13px; margin-bottom:10px; }
+  .hint { font-size:11.5px; font-style:italic; color:var(--deep); opacity:0.75; margin-top:6px; }
+  .ascend-note { font-size:12px; color:var(--rust); font-weight:600; text-align:center; padding:8px; border:1px dashed var(--rust); border-radius:4px; margin-top:10px; display:none; }
+
+  /* ---- Classifica ---- */
+  .rank-row {
+    display:flex; align-items:center; gap:10px; padding:9px 10px;
+    border:1px solid var(--line); border-radius:4px; margin-bottom:7px;
+    background: var(--tint);
+  }
+  .rank-row.me { border-color: var(--gold-lt); background: rgba(184,137,58,0.15); }
+  .rank-pos {
+    font-family:var(--font-display); font-weight:700; font-size:16px; color:var(--rust);
+    width:30px; text-align:center; flex:none;
+  }
+  .rank-row.me .rank-pos { color: var(--gold); }
+  .rank-medal { font-size:18px; width:30px; text-align:center; flex:none; }
+  .rank-main { flex:1; min-width:0; }
+  .rank-name { font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--deep); letter-spacing:0.03em; }
+  .rank-name .me-tag { color:var(--moss); font-size:10px; margin-left:6px; letter-spacing:0.08em; }
+  .rank-civ { font-size:11.5px; font-style:italic; color:var(--deep); opacity:0.75; }
+  .rank-stats {
+    font-family:var(--font-mono); font-size:11px; color:var(--deep);
+    text-align:right; flex:none; font-variant-numeric:tabular-nums; line-height:1.5;
+  }
+  .rank-stats .rank-score { color:var(--rust); font-weight:600; font-size:13px; }
+
+  ::-webkit-scrollbar { width: 9px; }
+  ::-webkit-scrollbar-track { background: var(--parch-dk); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+  /* ============================================================
+     LAYOUT ADATTIVO — fluido
+     Stessa navigazione a schermate + barra in basso a ogni dimensione.
+     Su schermi larghi i contenuti si distribuiscono su più colonne.
+     ============================================================ */
+  @media (min-width: 760px) {
+    .wrap { max-width: 920px; }
+
+    /* lista risorse su due colonne */
+    #resList {
+      column-count: 2; column-gap: 16px;
+    }
+    #resList .res-cat { column-span: all; }
+    #resList .res, #resList .res-sub { break-inside: avoid; }
+
+    /* pulsanti di raccolta manuale: più colonne */
+    .gather-grid { grid-template-columns: repeat(4, 1fr); }
+
+    /* edifici, tecnologie e manifatture: card affiancate in griglia */
+    #tabContent, #techContent, #craftContent {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+    /* elementi che devono occupare l'intera larghezza della griglia */
+    #tabContent .workforce-bar,
+    #tabContent .build-group,
+    #tabContent .res-cat,
+    #tabContent .hint,
+    #techContent .res-cat,
+    #techContent .hint,
+    #craftContent .workforce-bar,
+    #craftContent .hint {
+      grid-column: 1 / -1;
+    }
+    /* dentro un gruppo di costruzioni, le card tornano affiancate */
+    .build-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+    .build-group .build-cat { grid-column: 1 / -1; }
+  }
+
+  /* schermi ampi: contenitore un po' più largo e tre colonne per le card */
+  @media (min-width: 1100px) {
+    .wrap { max-width: 1040px; }
+    #resList { column-count: 3; }
+  }
+</style>
+
+<!-- ============================================================
+     FIREBASE — ponte verso lo script del gioco
+     ------------------------------------------------------------
+     Non serve modificare nulla qui: al primo avvio il gioco chiede
+     le credenziali minime (apiKey + projectId) tramite un form,
+     le salva in locale e inizializza Firebase.
+     Nella console Firebase abilita comunque:
+       - Authentication → Sign-in method → Email/Password
+       - Firestore Database → crea database
+     Senza credenziali il gioco resta in modalità locale (ospite).
+     ============================================================ -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+    signOut, onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import {
+    getFirestore, doc, getDoc, setDoc
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // inizializza Firebase con una config fornita a runtime (apiKey + projectId minimi)
+  function init(config) {
+    const app = initializeApp(config);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    window.AeonFB.ready = true;
+    window.AeonFB.auth = auth;
+    window.AeonFB.db = db;
+    window.AeonFB.createUser = (email, pass) => createUserWithEmailAndPassword(auth, email, pass);
+    window.AeonFB.signIn     = (email, pass) => signInWithEmailAndPassword(auth, email, pass);
+    window.AeonFB.signOut    = () => signOut(auth);
+    window.AeonFB.onAuth     = (cb) => onAuthStateChanged(auth, cb);
+    window.AeonFB.loadCloud  = async (uid) => {
+      const snap = await getDoc(doc(db, "saves", uid));
+      return snap.exists() ? snap.data() : null;
+    };
+    window.AeonFB.saveCloud  = async (uid, data) => {
+      await setDoc(doc(db, "saves", uid), data);
+    };
+    return true;
+  }
+
+  // ponte iniziale: non ancora pronto, ma con init() disponibile
+  window.AeonFB = {
+    ready: false,
+    notConfigured: true,
+    sdkLoaded: true,
+    init: (config) => {
+      try { window.AeonFB.notConfigured = false; return init(config); }
+      catch (e) { console.error("Firebase init fallita:", e); window.AeonFB.error = String(e); return false; }
+    },
+  };
+  window.dispatchEvent(new Event("aeon-fb-ready"));
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Æ O N</h1>
+    <div class="tag">L'ascesa delle civiltà</div>
+  </header>
+
+  <div class="era-banner">
+    <div class="topbar">
+      <div class="civ-tag" id="civTag">—</div>
+      <div class="ctrl-btns">
+        <button class="mini-btn" id="accountBtn" title="Accedi / Account">👤 Accedi</button>
+        <button class="mini-btn" id="themeBtn" title="Cambia tema">🎨 Tema</button>
+        <button class="mini-btn" id="saveBtn">Salva</button>
+        <button class="mini-btn" id="slotsBtn">Partite</button>
+      </div>
+    </div>
+    <div class="era-row">
+      <div>
+        <span class="era-name" id="eraName">Età della Pietra</span>
+        <span class="era-num" id="eraNum">[ Era 1 / 10 ]</span>
+        <div class="era-desc" id="eraDesc"></div>
+      </div>
+      <div class="stat-row">
+        <span class="s"><span class="lbl">Popolazione</span> <b class="num-pop" id="popStat">0</b><span class="lbl">/</span><b class="num-cap" id="popCapStat">0</b></span>
+        <span class="s"><span class="lbl">👷 Occupati</span> <b class="num-occ" id="occStat">0</b><span class="lbl">· Liberi</span> <b class="num-free" id="freeStat">0</b></span>
+        <span class="s"><span class="lbl">Conoscenza</span> <b class="num-sci" id="sciStat">0</b></span>
+      </div>
+    </div>
+    <div class="era-progress"><div id="eraBar"></div></div>
+    <div class="era-progress-label" id="eraReq"></div>
+    <div class="ascend-note" id="ascendNote"></div>
+  </div>
+
+  <!-- ===== SCREENS ===== -->
+  <div class="grid">
+
+    <!-- SCREEN: RISORSE -->
+    <section class="screen active" id="screen-res">
+      <div class="panel" style="margin-bottom:16px;">
+        <h2>Risorse</h2>
+        <div class="res-list" id="resList"></div>
+      </div>
+      <div class="panel">
+        <h2>Lavoro Manuale</h2>
+        <div class="gather-grid" id="gatherGrid"></div>
+        <div class="hint">Ogni clic raccoglie risorse base. Costruisci edifici per produrre in automatico mentre sei via.</div>
+      </div>
+    </section>
+
+    <!-- SCREEN: COSTRUISCI (edifici) -->
+    <section class="screen" id="screen-build">
+      <div class="panel">
+        <h2>Costruzioni</h2>
+        <div id="tabContent"></div>
+      </div>
+    </section>
+
+    <!-- SCREEN: TECNOLOGIE -->
+    <section class="screen" id="screen-tech">
+      <div class="panel">
+        <h2>Tecnologie</h2>
+        <div id="techContent"></div>
+      </div>
+    </section>
+
+    <!-- SCREEN: MANIFATTURE -->
+    <section class="screen" id="screen-craft">
+      <div class="panel">
+        <h2>Manifatture</h2>
+        <div id="craftContent"></div>
+      </div>
+    </section>
+
+    <!-- SCREEN: CRONACA -->
+    <section class="screen" id="screen-log">
+      <div class="panel">
+        <h2>Cronaca</h2>
+        <div id="log"></div>
+      </div>
+    </section>
+
+    <!-- SCREEN: CLASSIFICA -->
+    <section class="screen" id="screen-rank">
+      <div class="panel">
+        <h2>Classifica delle Civiltà</h2>
+        <div class="hint" style="margin-bottom:10px;">Le stirpi rivali crescono in parallelo. Il punteggio combina era raggiunta, popolazione e conoscenza.</div>
+        <div id="rankList"></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="nav-btn active" data-screen="screen-res"><span class="nicon">🌾</span>Risorse</button>
+  <button class="nav-btn" data-screen="screen-build"><span class="nicon">🏛️</span>Costruisci<span class="nav-badge" id="badgeBuild"></span></button>
+  <button class="nav-btn" data-screen="screen-tech"><span class="nicon">🔬</span>Tecnologie<span class="nav-badge" id="badgeTech"></span></button>
+  <button class="nav-btn" data-screen="screen-craft"><span class="nicon">⚒️</span>Manifatture</button>
+  <button class="nav-btn" data-screen="screen-rank"><span class="nicon">🏆</span>Classifica</button>
+  <button class="nav-btn" data-screen="screen-log"><span class="nicon">📖</span>Cronaca</button>
+</nav>
+
+<!-- CIV SELECT -->
+<div class="overlay" id="civOverlay">
+  <h2>Scegli la tua Stirpe</h2>
+  <div class="sub">Ogni civiltà porta un dono e un fardello. La strada è lunga — scegli con saggezza.</div>
+  <div class="civ-grid" id="civGrid"></div>
+  <div class="name-panel" id="namePanel">
+    <div class="name-prompt">Hai scelto: <b id="chosenCivName">—</b></div>
+    <label class="name-label" for="civNameInput">Dai un nome alla tua civiltà</label>
+    <input type="text" id="civNameInput" class="name-input" maxlength="28" placeholder="Es. Regno di Valoria" autocomplete="off" />
+    <div class="name-actions">
+      <button class="gather-btn" id="startGameBtn">Inizia la tua Storia</button>
+      <button class="mini-btn" id="namePanelCancel">Cambia stirpe</button>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:18px;">
+    <button class="mini-btn" id="civBackBtn" style="display:none;">← Torna alle partite</button>
+  </div>
+</div>
+
+<!-- SAVE SLOTS -->
+<div class="overlay" id="slotsOverlay" style="display:none;">
+  <h2>Le tue Partite</h2>
+  <div class="sub">Ogni partita è uno slot indipendente. Passa dall'una all'altra senza perdere i progressi.</div>
+  <div class="slots-list" id="slotsList"></div>
+  <div style="text-align:center; margin-top:18px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+    <button class="gather-btn" id="newGameBtn" style="max-width:240px;">+ Nuova Partita</button>
+    <button class="mini-btn" id="slotsCloseBtn">Chiudi</button>
+  </div>
+</div>
+
+<!-- LOGIN / ACCOUNT -->
+<div class="overlay" id="authOverlay" style="display:none;">
+  <h2>Account</h2>
+  <div class="sub">Accedi per salvare le tue partite nel cloud e ritrovarle su ogni dispositivo. Senza accesso, giochi come ospite con salvataggio locale.</div>
+  <div class="auth-panel">
+    <!-- stato: Firebase da configurare (prima volta) -->
+    <div id="authConfig" style="display:none;">
+      <div class="auth-config-intro">Per il salvataggio nel cloud, collega il tuo progetto Firebase. Servono solo due dati, dalla console Firebase → Impostazioni progetto → <i>I tuoi SDK</i>.</div>
+      <label class="auth-label" for="cfgApiKey">API Key</label>
+      <input type="text" id="cfgApiKey" class="auth-input" autocomplete="off" spellcheck="false" placeholder="AIza…" />
+      <label class="auth-label" for="cfgProjectId">Project ID</label>
+      <input type="text" id="cfgProjectId" class="auth-input" autocomplete="off" spellcheck="false" placeholder="il-mio-progetto" />
+      <div class="auth-msg" id="cfgMsg"></div>
+      <div class="auth-actions">
+        <button class="gather-btn" id="cfgConnectBtn">Collega Firebase</button>
+        <button class="mini-btn" id="cfgSkipBtn">Gioca come ospite</button>
+      </div>
+      <div class="auth-note">I dati restano salvati solo su questo dispositivo e servono unicamente a connettere il gioco al tuo progetto.</div>
+    </div>
+    <!-- stato: NON loggato -->
+    <div id="authForm" style="display:none;">
+      <label class="auth-label" for="authEmail">Email</label>
+      <input type="email" id="authEmail" class="auth-input" autocomplete="username" placeholder="tu@esempio.com" />
+      <label class="auth-label" for="authPass">Password</label>
+      <input type="password" id="authPass" class="auth-input" autocomplete="current-password" placeholder="••••••••" />
+      <div class="auth-msg" id="authMsg"></div>
+      <div class="auth-actions">
+        <button class="gather-btn" id="authLoginBtn">Accedi</button>
+        <button class="mini-btn" id="authRegisterBtn">Registrati</button>
+      </div>
+      <div class="auth-note" id="authStatusNote"></div>
+      <div style="text-align:center;margin-top:8px;">
+        <button class="auth-link" id="authReconfigBtn">Cambia progetto Firebase</button>
+      </div>
+    </div>
+    <!-- stato: loggato -->
+    <div id="authLogged" style="display:none;">
+      <div class="auth-logged-as">Hai effettuato l'accesso come<br><b id="authUserEmail">—</b></div>
+      <div class="auth-msg" id="authMsg2"></div>
+      <div class="auth-actions">
+        <button class="mini-btn" id="authLogoutBtn">Esci</button>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:18px;">
+    <button class="mini-btn" id="authCloseBtn">Chiudi</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   ÆON — Idle Civilization Builder
+   Slow, long progression. 10 eras, 10 civs.
+   ============================================================ */
+
+/* ============================================================
+   ROADMAP — stato dei prossimi passi
+   ------------------------------------------------------------
+   ✔ 1. ALTRI TEMI — fatto (Pergamena, Moderno, Nebulosa, Aurora).
+   ✔ 2. LAYOUT ADATTIVO — fatto (layout fluido multi-colonna >=760px).
+   ✔ 3. LOGIN + SALVATAGGIO FIREBASE — fatto.
+        Cloud quando loggato (email+password), locale come ospite.
+        ▶ Al primo avvio il gioco chiede le credenziali minime
+          (API Key + Project ID); le salva in locale e collega Firebase.
+          Nessuna modifica al codice necessaria.
+        ▶ Nella console Firebase abilita comunque:
+          Authentication (Email/Password) + Firestore Database.
+   ============================================================ */
+
+const fmt = n => {
+  if (n < 1000) return (Math.floor(n*10)/10).toString().replace(/\.0$/,'');
+  const u = ['','K','M','B','T','Qa','Qi','Sx','Sp','Oc','No','Dc'];
+  let t = 0; while (n >= 1000 && t < u.length-1) { n/=1000; t++; }
+  return (Math.floor(n*100)/100) + u[t];
+};
+// finer precision for small per-worker rates
+const fmtSmall = n => {
+  if (n === 0) return '0';
+  if (n >= 100) return fmt(n);
+  if (n >= 10) return (Math.round(n*10)/10).toString();
+  if (n >= 1) return (Math.round(n*100)/100).toString();
+  return (Math.round(n*1000)/1000).toString(); // up to 3 decimals under 1
+};
+const fmtRate = n => (n>=0?'+':'') + fmt(n) + '/s';
+// valore risorsa stabile: sotto 1000 sempre intero (niente decimali tremolanti)
+const fmtRes = n => {
+  if (n < 1000) return Math.floor(n).toString();
+  return fmt(n);
+};
+
+/* Ogni unità di popolazione consuma cibo ogni secondo (realismo) */
+const FOOD_PER_POP = 0.05;
+
+/* Bilanciamento globale: rallenta la progressione complessiva.
+   <1 = produzione automatica più lenta. */
+const PROD_BALANCE = 0.8;
+/* Rendimento decrescente del bonus raccolta manuale per abitante */
+const GATHER_POP_BONUS = 0.012;
+
+/* ---------- RESOURCES ---------- */
+// base = gathered/produced raw; derived = crafted
+// baseCap = capacità di stoccaggio iniziale (aumentata dai magazzini)
+const RES = {
+  food:    { name:'Cibo',       icon:'🌾', cat:'base',    val:0, baseCap:500 },
+  wood:    { name:'Legno',      icon:'🪵', cat:'base',    val:0, baseCap:500 },
+  stone:   { name:'Pietra',     icon:'🪨', cat:'base',    val:0, baseCap:500 },
+  ore:     { name:'Minerale',   icon:'⛏️', cat:'base',    val:0, eraReq:2, baseCap:400 },
+  science: { name:'Conoscenza', icon:'📜', cat:'base',    val:0, baseCap:300 },
+  // derived
+  tools:   { name:'Utensili',   icon:'🔨', cat:'derived', val:0, eraReq:1, baseCap:200 },
+  bronze:  { name:'Bronzo',     icon:'🛡️', cat:'derived', val:0, eraReq:2, baseCap:200 },
+  iron:    { name:'Ferro',      icon:'⚔️', cat:'derived', val:0, eraReq:3, baseCap:200 },
+  cloth:   { name:'Tessuti',    icon:'🧵', cat:'derived', val:0, eraReq:3, baseCap:200 },
+  coin:    { name:'Monete',     icon:'🪙', cat:'derived', val:0, eraReq:4, baseCap:300 },
+  steel:   { name:'Acciaio',    icon:'🏗️', cat:'derived', val:0, eraReq:6, baseCap:300 },
+  fuel:    { name:'Carburante', icon:'🛢️', cat:'derived', val:0, eraReq:7, baseCap:300 },
+  parts:   { name:'Componenti', icon:'⚙️', cat:'derived', val:0, eraReq:8, baseCap:300 },
+  chips:   { name:'Microchip',  icon:'💾', cat:'derived', val:0, eraReq:9, baseCap:400 },
+  alloy:   { name:'Lega Stellare',icon:'🚀', cat:'derived', val:0, eraReq:10, baseCap:400 },
+};
+
+/* ---------- ERAS ---------- */
+const ERAS = [
+  { name:'Età della Pietra', desc:'Tribù nomadi che imparano a sopravvivere.',
+    req:{ science:145, food:360 } },
+  { name:'Età Neolitica', desc:'Nascono i villaggi, l\'agricoltura e i primi attrezzi.',
+    req:{ science:720, tools:90, food:1800 } },
+  { name:'Età del Bronzo', desc:'Metallurgia, commercio e prime città-stato.',
+    req:{ science:2700, bronze:220, ore:1080 } },
+  { name:'Età del Ferro', desc:'Eserciti di ferro e regni in espansione.',
+    req:{ science:9000, iron:540, cloth:360 } },
+  { name:'Età Classica', desc:'Imperi, monete e grandi opere pubbliche.',
+    req:{ science:29000, coin:1450, iron:2150 } },
+  { name:'Medioevo', desc:'Castelli, gilde e cattedrali che sfidano il cielo.',
+    req:{ science:90000, coin:7200, tools:5400 } },
+  { name:'Età Industriale', desc:'Vapore, acciaio e fabbriche fumanti.',
+    req:{ science:290000, steel:4500, coin:36000 } },
+  { name:'Età Moderna', desc:'Motori, elettricità e produzione di massa.',
+    req:{ science:1080000, fuel:14400, steel:27000 } },
+  { name:'Età dell\'Informazione', desc:'Calcolatori, reti e automazione.',
+    req:{ science:4500000, parts:54000, fuel:90000 } },
+  { name:'Età Spaziale', desc:'L\'umanità tende la mano alle stelle.',
+    req:{ science:21600000, chips:180000, alloy:45000 } },
+];
+
+/* ---------- GATHER ACTIONS ---------- */
+const GATHER = [
+  { id:'food',  label:'Cacciare / Raccogliere', res:'food',  amt:1 },
+  { id:'wood',  label:'Tagliare Legna',         res:'wood',  amt:1 },
+  { id:'stone', label:'Spaccare Pietra',        res:'stone', amt:1 },
+  { id:'science', label:'Osservare & Apprendere', res:'science', amt:0.5 },
+];
+
+/* ---------- BUILDINGS (auto producers) ---------- */
+// cost grows ^1.15. produce per second (modified by pop & civ).
+const BUILDINGS = [
+  // era 1
+  { id:'hut',     name:'Capanna',        era:1, desc:'Ospita la popolazione.',
+    cost:{wood:15,stone:5}, prod:{}, popCap:3 },
+  { id:'forager', name:'Capanno Raccolta',era:1, desc:'Raccoglie cibo nei boschi.',
+    cost:{wood:20}, prod:{food:0.4}, jobs:1 },
+  { id:'lumber',  name:'Taglialegna',    era:1, desc:'Abbatte alberi senza sosta.',
+    cost:{wood:12,stone:8}, prod:{wood:0.3}, jobs:1 },
+  { id:'quarry',  name:'Cava',           era:1, desc:'Estrae pietra grezza.',
+    cost:{wood:25,stone:10}, prod:{stone:0.3}, jobs:1 },
+  { id:'shrine',  name:'Santuario',      era:1, desc:'Gli anziani tramandano il sapere.',
+    cost:{wood:30,stone:20}, prod:{science:0.15}, jobs:1 },
+  // era 2
+  { id:'farm',    name:'Fattoria',       era:2, desc:'Agricoltura: molto cibo.',
+    cost:{wood:80,stone:40,tools:5}, prod:{food:2}, popCap:0, jobs:3 },
+  { id:'house',   name:'Casa',           era:2, desc:'Alloggio migliore.',
+    cost:{wood:60,stone:60}, prod:{}, popCap:6 },
+  { id:'workshop',name:'Bottega',        era:2, desc:'Trasforma materiali in utensili.',
+    cost:{wood:120,stone:60}, prod:{}, jobs:2, craft:true },
+  { id:'library', name:'Biblioteca',     era:2, desc:'Accumula conoscenza.',
+    cost:{wood:100,stone:120,tools:10}, prod:{science:0.6}, jobs:2, storage:{science:600} },
+  // era 3
+  { id:'mine',    name:'Miniera',        era:3, desc:'Estrae minerale grezzo.',
+    cost:{wood:200,stone:300,tools:20}, prod:{ore:1.2}, jobs:4 },
+  { id:'smelter', name:'Fonderia',       era:3, desc:'Fonde bronzo dai minerali.',
+    cost:{stone:400,tools:40}, prod:{}, jobs:3, craft:true },
+  { id:'market',  name:'Mercato',        era:3, desc:'Scambi che generano sapere.',
+    cost:{wood:300,stone:200,bronze:30}, prod:{science:1.5}, jobs:3, storage:{science:1500} },
+  // era 4
+  { id:'forge',   name:'Forgia di Ferro',era:4, desc:'Lavora il ferro.',
+    cost:{stone:800,ore:200,bronze:60}, prod:{}, jobs:4, craft:true },
+  { id:'weaver',  name:'Tessitura',      era:4, desc:'Produce tessuti.',
+    cost:{wood:600,tools:80}, prod:{}, jobs:4, craft:true },
+  { id:'manor',   name:'Villa',          era:4, desc:'Grande alloggio.',
+    cost:{stone:900,iron:50,cloth:40}, prod:{}, popCap:18 },
+  // era 5
+  { id:'mint',    name:'Zecca',          era:5, desc:'Conia monete.',
+    cost:{stone:1500,iron:300,cloth:100}, prod:{}, jobs:5, craft:true },
+  { id:'academy', name:'Accademia',      era:5, desc:'Grande centro di sapere.',
+    cost:{stone:2000,iron:400,coin:200}, prod:{science:6}, jobs:6, storage:{science:6000} },
+  { id:'aqueduct',name:'Acquedotto',     era:5, desc:'Sostiene grandi città.',
+    cost:{stone:3000,iron:600}, prod:{food:8}, popCap:30, jobs:4 },
+  // era 6
+  { id:'guild',   name:'Gilda',          era:6, desc:'Artigiani: molti utensili.',
+    cost:{wood:4000,iron:800,coin:600}, prod:{}, jobs:8, craft:true },
+  { id:'cathedral',name:'Cattedrale',    era:6, desc:'Ispira il popolo: sapere.',
+    cost:{stone:8000,iron:2000,coin:2000}, prod:{science:18}, jobs:10, storage:{science:30000} },
+  { id:'castle',  name:'Castello',       era:6, desc:'Protegge e ospita molti.',
+    cost:{stone:12000,iron:4000,coin:3000}, prod:{}, popCap:80 },
+  // era 7
+  { id:'blastfurnace',name:'Altoforno',  era:7, desc:'Produce acciaio.',
+    cost:{stone:15000,iron:6000,coin:8000}, prod:{}, jobs:12, craft:true },
+  { id:'factory', name:'Fabbrica',       era:7, desc:'Produzione di massa di utensili.',
+    cost:{steel:1500,coin:12000}, prod:{}, jobs:20, craft:true },
+  { id:'tenement',name:'Caseggiato',     era:7, desc:'Alloggi operai in massa.',
+    cost:{steel:1000,coin:8000}, prod:{}, popCap:200 },
+  // era 8
+  { id:'refinery',name:'Raffineria',     era:8, desc:'Distilla carburante.',
+    cost:{steel:8000,coin:40000}, prod:{}, jobs:25, craft:true },
+  { id:'powerplant',name:'Centrale',     era:8, desc:'Energia per la conoscenza.',
+    cost:{steel:12000,fuel:2000}, prod:{science:90}, jobs:30, storage:{science:300000} },
+  { id:'suburb',  name:'Sobborgo',       era:8, desc:'Vaste aree residenziali.',
+    cost:{steel:6000,fuel:1500}, prod:{}, popCap:600 },
+  // era 9
+  { id:'assembly',name:'Linea di Montaggio',era:9, desc:'Costruisce componenti.',
+    cost:{steel:40000,fuel:15000}, prod:{}, jobs:40, craft:true },
+  { id:'datacenter',name:'Data Center',  era:9, desc:'Fabbrica microchip.',
+    cost:{steel:60000,fuel:25000,parts:5000}, prod:{}, jobs:50, craft:true },
+  { id:'arcology',name:'Arcologia',      era:9, desc:'Metropoli verticale.',
+    cost:{steel:80000,parts:8000}, prod:{}, popCap:2000 },
+  // era 10
+  { id:'fusion',  name:'Reattore a Fusione',era:10, desc:'Energia illimitata.',
+    cost:{steel:200000,chips:20000}, prod:{science:1200}, jobs:60, storage:{science:5000000} },
+  { id:'shipyard',name:'Cantiere Orbitale',era:10, desc:'Forgia leghe stellari.',
+    cost:{steel:300000,parts:40000,chips:30000}, prod:{}, jobs:80, craft:true },
+  { id:'colony',  name:'Colonia Spaziale',era:10, desc:'Casa fra le stelle.',
+    cost:{alloy:5000,chips:50000}, prod:{}, popCap:10000 },
+  // ---- Magazzini: aumentano la capacità di stoccaggio ----
+  { id:'granary', name:'Granaio',        era:1, desc:'Conserva le risorse base.',
+    cost:{wood:30,stone:15}, prod:{},
+    storage:{food:400,wood:400,stone:400} },
+  { id:'storehouse',name:'Deposito',     era:2, desc:'Magazzino per minerali e utensili.',
+    cost:{wood:120,stone:90,tools:8}, prod:{},
+    storage:{ore:500,tools:300,bronze:300,food:300,wood:300,stone:300} },
+  { id:'warehouse',name:'Magazzino',     era:4, desc:'Stocca metalli, tessuti, monete e utensili.',
+    cost:{stone:700,iron:120}, prod:{},
+    storage:{iron:600,cloth:600,coin:800,ore:500,bronze:400,tools:700} },
+  { id:'depot',   name:'Deposito Industriale',era:7, desc:'Vasti silos per la produzione moderna.',
+    cost:{steel:2000,coin:10000}, prod:{},
+    storage:{steel:3000,fuel:3000,coin:5000,iron:2000} },
+  { id:'archive', name:'Grande Archivio',era:5, desc:'Custodisce un\'enorme conoscenza.',
+    cost:{stone:1800,iron:300,coin:150}, prod:{},
+    storage:{science:8000} },
+  { id:'datavault',name:'Caveau di Dati',era:9, desc:'Stoccaggio di massa per l\'era dell\'informazione.',
+    cost:{steel:50000,fuel:20000}, prod:{},
+    storage:{parts:40000,chips:50000,fuel:50000,steel:30000,science:2000000} },
+  { id:'megasilo',name:'Mega-Silo Orbitale',era:10, desc:'Depositi colossali fra le stelle.',
+    cost:{steel:150000,parts:30000}, prod:{},
+    storage:{alloy:30000,chips:80000,steel:200000,science:20000000} },
+];
+
+/* ---------- TECHNOLOGIES (one-time, unlock/boost) ---------- */
+const TECH = [
+  { id:'fire',    name:'Dominio del Fuoco', era:1, desc:'+50% raccolta manuale cibo.',
+    cost:{science:40}, effect:{gatherFood:1.5} },
+  { id:'tools_t', name:'Lavorazione Selce', era:1, desc:'Sblocca gli Utensili nelle botteghe.',
+    cost:{science:120, stone:50} },
+  { id:'agri',    name:'Agricoltura',       era:2, desc:'+25% produzione di cibo.',
+    cost:{science:300} , effect:{prodFood:1.25}},
+  { id:'wheel',   name:'La Ruota',          era:2, desc:'+20% tutta la produzione base.',
+    cost:{science:600, tools:30}, effect:{prodAll:1.2} },
+  { id:'writing', name:'Scrittura',         era:2, desc:'+30% conoscenza.',
+    cost:{science:500}, effect:{prodSci:1.3} },
+  { id:'bronze_t',name:'Metallurgia Bronzo',era:3, desc:'Le fonderie producono bronzo.',
+    cost:{science:1200, ore:100} },
+  { id:'currency',name:'Conio',             era:3, desc:'Sblocca le monete.',
+    cost:{science:2000, bronze:50} },
+  { id:'iron_t',  name:'Metallurgia Ferro', era:4, desc:'Le forge producono ferro.',
+    cost:{science:4000, ore:300} },
+  { id:'loom',    name:'Telaio',            era:4, desc:'Le tessiture producono tessuti.',
+    cost:{science:3500, tools:100} },
+  { id:'law',     name:'Codice di Leggi',   era:5, desc:'+15% popolazione massima.',
+    cost:{science:12000}, effect:{popCap:1.15} },
+  { id:'masonry', name:'Architettura',      era:5, desc:'-15% costo edifici.',
+    cost:{science:14000, iron:200}, effect:{buildCost:0.85} },
+  { id:'printing',name:'Stampa',            era:6, desc:'+50% conoscenza.',
+    cost:{science:45000}, effect:{prodSci:1.5} },
+  { id:'steel_t', name:'Bessemer',          era:7, desc:'Gli altiforni producono acciaio.',
+    cost:{science:140000, iron:5000} },
+  { id:'steam',   name:'Macchina a Vapore', era:7, desc:'+40% tutta la produzione.',
+    cost:{science:180000, steel:1000}, effect:{prodAll:1.4} },
+  { id:'oil_t',   name:'Trivellazione',     era:8, desc:'Le raffinerie producono carburante.',
+    cost:{science:550000, steel:10000} },
+  { id:'electric',name:'Elettricità',       era:8, desc:'+60% conoscenza.',
+    cost:{science:700000, fuel:1000}, effect:{prodSci:1.6} },
+  { id:'parts_t', name:'Catena di Montaggio',era:9, desc:'Le linee producono componenti.',
+    cost:{science:2200000, fuel:30000} },
+  { id:'compute', name:'Calcolo Digitale',  era:9, desc:'I data center producono microchip.',
+    cost:{science:3000000, parts:10000} },
+  { id:'auto',    name:'Automazione',       era:9, desc:'+80% tutta la produzione.',
+    cost:{science:4000000, chips:5000}, effect:{prodAll:1.8} },
+  { id:'alloy_t', name:'Metallurgia Stellare',era:10, desc:'I cantieri producono leghe.',
+    cost:{science:14000000, chips:60000} },
+  { id:'ai',      name:'Superintelligenza',  era:10, desc:'+150% conoscenza.',
+    cost:{science:20000000, alloy:2000}, effect:{prodSci:2.5} },
+];
+
+/* ---------- CRAFTS (manual conversion, also auto via craft buildings) ---------- */
+// Each craft building auto-converts inputs->output per cycle if inputs available.
+const CRAFTS = {
+  workshop:    { in:{wood:2, stone:1}, out:{tools:1},  rate:0.25, needTech:'tools_t', name:'Utensili' },
+  smelter:     { in:{ore:3},           out:{bronze:1}, rate:0.2,  needTech:'bronze_t', name:'Bronzo' },
+  forge:       { in:{ore:4, bronze:1}, out:{iron:1},   rate:0.18, needTech:'iron_t',  name:'Ferro' },
+  weaver:      { in:{food:3, wood:1},  out:{cloth:1},  rate:0.2,  needTech:'loom',     name:'Tessuti' },
+  mint:        { in:{bronze:2, iron:1},out:{coin:1},   rate:0.3,  needTech:'currency', name:'Monete' },
+  guild:       { in:{wood:4, iron:2},  out:{tools:3},  rate:0.4,  needTech:null,       name:'Utensili' },
+  blastfurnace:{ in:{iron:5, ore:3},   out:{steel:1},  rate:0.25, needTech:'steel_t',  name:'Acciaio' },
+  factory:     { in:{steel:2, coin:5}, out:{tools:8},  rate:0.6,  needTech:null,       name:'Utensili' },
+  refinery:    { in:{steel:3, coin:8}, out:{fuel:1},   rate:0.3,  needTech:'oil_t',    name:'Carburante' },
+  assembly:    { in:{steel:6, fuel:2}, out:{parts:1},  rate:0.35, needTech:'parts_t',  name:'Componenti' },
+  datacenter:  { in:{parts:4, fuel:3}, out:{chips:1},  rate:0.3,  needTech:'compute',  name:'Microchip' },
+  shipyard:    { in:{steel:20, chips:5},out:{alloy:1}, rate:0.25, needTech:'alloy_t',  name:'Lega Stellare' },
+};
+
+/* ---------- CIVILIZATIONS ---------- */
+const CIVS = [
+  { id:'aurochs', name:'Figli dell\'Uro', flavor:'Cacciatori delle grandi pianure, prosperano grazie al cibo.',
+    bonusTxt:'+40% raccolta e produzione di cibo', malusTxt:'−20% conoscenza',
+    mods:{ prodFood:1.4, gatherFood:1.4, prodSci:0.8 }, start:{food:40} },
+  { id:'stonekin', name:'Stirpe di Pietra', flavor:'Scavano nella roccia, maestri di cava e miniera.',
+    bonusTxt:'+50% pietra e minerale', malusTxt:'−15% cibo',
+    mods:{ prodStone:1.5, prodOre:1.5, prodFood:0.85 }, start:{stone:30} },
+  { id:'sylvan', name:'Popolo Silvano', flavor:'Vivono fra gli alberi e il legno non manca mai.',
+    bonusTxt:'+50% legno, −10% costo edifici', malusTxt:'−15% minerale',
+    mods:{ prodWood:1.5, buildCost:0.9, prodOre:0.85 }, start:{wood:40} },
+  { id:'scholars', name:'Ordine dei Saggi', flavor:'Una civiltà ossessionata dalla conoscenza.',
+    bonusTxt:'+50% conoscenza', malusTxt:'−15% tutta la produzione di risorse',
+    mods:{ prodSci:1.5, prodAll:0.85 }, start:{science:30} },
+  { id:'merchants', name:'Lega Mercantile', flavor:'Mercanti astuti: i loro forzieri traboccano.',
+    bonusTxt:'+60% monete, +20% manifatture', malusTxt:'−20% conoscenza',
+    mods:{ prodCoin:1.6, craftRate:1.2, prodSci:0.8 }, start:{} },
+  { id:'fertile', name:'Tribù Fertile', flavor:'Famiglie numerose: la popolazione esplode.',
+    bonusTxt:'+30% popolazione massima, +15% cibo', malusTxt:'−15% conoscenza',
+    mods:{ popCap:1.3, prodFood:1.15, prodSci:0.85 }, start:{food:30} },
+  { id:'smiths', name:'Clan dei Fabbri', flavor:'Forgiatori leggendari di metalli e leghe.',
+    bonusTxt:'+40% velocità manifatture', malusTxt:'−10% cibo, −10% legno',
+    mods:{ craftRate:1.4, prodFood:0.9, prodWood:0.9 }, start:{tools:10} },
+  { id:'nomads', name:'Orde Nomadi', flavor:'Veloci e instancabili, raccolgono il doppio a mano.',
+    bonusTxt:'+100% raccolta manuale', malusTxt:'−20% produzione automatica',
+    mods:{ gatherAll:2.0, prodAll:0.8 }, start:{} },
+  { id:'builders', name:'Casta dei Costruttori', flavor:'Architetti grandiosi: edifici a buon mercato.',
+    bonusTxt:'−25% costo edifici, +15% pop. max', malusTxt:'−15% conoscenza',
+    mods:{ buildCost:0.75, popCap:1.15, prodSci:0.85 }, start:{wood:20,stone:20} },
+  { id:'balanced', name:'Confederazione Unita', flavor:'Nessun talento eccezionale, ma nessuna debolezza.',
+    bonusTxt:'+10% a tutto, equilibrio perfetto', malusTxt:'nessun malus',
+    mods:{ prodAll:1.1, gatherAll:1.1, prodSci:1.1, popCap:1.1 }, start:{} },
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let S = null;
+
+function freshState(civId, civName) {
+  const civ = CIVS.find(c=>c.id===civId);
+  const res = {}; for (const k in RES) res[k] = 0;
+  for (const k in (civ.start||{})) res[k] += civ.start[k];
+  return {
+    civ: civId,
+    name: (civName && civName.trim()) ? civName.trim() : civ.name,  // nome scelto dal giocatore
+    res,
+    buildings: {},   // id -> count
+    workers: {},     // id -> assigned worker count
+    tech: {},        // id -> true
+    era: 1,          // 1-indexed
+    pop: 1,
+    autoAssign: true,// auto-distribute new population to jobs
+    lastTick: Date.now(),
+    log: [],
+    bots: makeBots(civId, 7),  // civiltà rivali simulate
+  };
+}
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+function civMods() {
+  const civ = CIVS.find(c=>c.id===S.civ);
+  return civ ? (civ.mods||{}) : {};
+}
+function techMult(key) {
+  let m = 1;
+  for (const t of TECH) {
+    if (S.tech[t.id] && t.effect && t.effect[key]!==undefined) m *= t.effect[key];
+  }
+  return m;
+}
+// combined production multiplier for a given resource
+function prodMult(resKey) {
+  const cm = civMods();
+  let m = PROD_BALANCE;
+  m *= (cm.prodAll||1) * techMult('prodAll');
+  if (resKey==='food')    m *= (cm.prodFood||1) * techMult('prodFood');
+  if (resKey==='wood')    m *= (cm.prodWood||1);
+  if (resKey==='stone')   m *= (cm.prodStone||1);
+  if (resKey==='ore')     m *= (cm.prodOre||1);
+  if (resKey==='science') m *= (cm.prodSci||1) * techMult('prodSci');
+  if (resKey==='coin')    m *= (cm.prodCoin||1);
+  return m;
+}
+function gatherMult(resKey) {
+  const cm = civMods();
+  let m = (cm.gatherAll||1);
+  if (resKey==='food') m *= (cm.gatherFood||1) * techMult('gatherFood');
+  return m;
+}
+function craftRateMult() {
+  const cm = civMods();
+  return (cm.craftRate||1) * PROD_BALANCE;
+}
+function buildCostMult() {
+  const cm = civMods();
+  return (cm.buildCost||1) * techMult('buildCost');
+}
+function popCapMult() {
+  const cm = civMods();
+  return (cm.popCap||1) * techMult('popCap');
+}
+
+/* ============================================================
+   DERIVED VALUES
+   ============================================================ */
+function popCapacity() {
+  let cap = 1;
+  for (const b of BUILDINGS) {
+    if (b.popCap) cap += (S.buildings[b.id]||0) * b.popCap;
+  }
+  return Math.floor(cap * popCapMult());
+}
+// capacità di stoccaggio di una risorsa (base + magazzini). st opzionale per i bot.
+function resCapacity(resKey, st) {
+  st = st || S;
+  const r = RES[resKey];
+  let cap = (r && r.baseCap) ? r.baseCap : Infinity;
+  if (cap === Infinity) return Infinity;
+  for (const b of BUILDINGS) {
+    if (b.storage && b.storage[resKey]) cap += (st.buildings[b.id]||0) * b.storage[resKey];
+  }
+  return Math.floor(cap);
+}
+// applica il cap a tutte le risorse di uno stato (eccesso perso)
+function clampResCaps(st) {
+  st = st || S;
+  for (const k in st.res) {
+    const cap = resCapacity(k, st);
+    if (cap !== Infinity && st.res[k] > cap) st.res[k] = cap;
+  }
+}
+// list of buildings that employ workers (produce or craft)
+function isJobBuilding(b) { return !!b.jobs; }
+
+/* categoria di un edificio, dedotta dalle sue proprietà (per il raggruppamento nella UI) */
+const BUILD_CATEGORIES = [
+  { key:'housing', label:'🏠 Alloggi',      desc:'Aumentano la popolazione massima.' },
+  { key:'knowledge',label:'📜 Conoscenza',  desc:'Generano sapere per avanzare di era.' },
+  { key:'craft',   label:'⚒️ Manifatture',  desc:'Convertono risorse (gestite in scheda Manifatture).' },
+  { key:'producer',label:'🌾 Produttori',   desc:'Estraggono e raccolgono risorse base.' },
+  { key:'storage', label:'📦 Magazzini',    desc:'Aumentano la capacità di stoccaggio.' },
+];
+function buildingCategory(b) {
+  if (b.popCap) return 'housing';
+  if (b.craft) return 'craft';
+  if (b.prod && b.prod.science) return 'knowledge';
+  if (b.storage) return 'storage';
+  if (b.prod && Object.keys(b.prod).length) return 'producer';
+  return 'producer';
+}
+
+// worker capacity of a single building type (jobs per unit × units built)
+function buildingCapacity(id) {
+  const b = BUILDINGS.find(x=>x.id===id);
+  if (!b || !b.jobs) return 0;
+  return (S.buildings[id]||0) * b.jobs;
+}
+// total worker slots across all job buildings
+function jobsTotal() {
+  let j = 0;
+  for (const b of BUILDINGS) if (b.jobs) j += (S.buildings[b.id]||0)*b.jobs;
+  return j;
+}
+function totalWorkforce() { return Math.floor(S.pop); }
+function assignedWorkers() {
+  let sum = 0;
+  for (const id in (S.workers||{})) sum += S.workers[id]||0;
+  return sum;
+}
+function freeWorkers() { return Math.max(0, totalWorkforce() - assignedWorkers()); }
+
+// clamp every assignment to its building capacity, and total to workforce
+function clampWorkers() {
+  if (!S.workers) S.workers = {};
+  // clamp each to capacity
+  for (const id in S.workers) {
+    const cap = buildingCapacity(id);
+    if (S.workers[id] > cap) S.workers[id] = cap;
+    if (S.workers[id] < 0) S.workers[id] = 0;
+    if (cap === 0) delete S.workers[id];
+  }
+  // if total exceeds workforce, trim from the last-assigned buildings
+  let over = assignedWorkers() - totalWorkforce();
+  if (over > 0) {
+    const ids = Object.keys(S.workers);
+    for (let i = ids.length-1; i >= 0 && over > 0; i--) {
+      const take = Math.min(S.workers[ids[i]], over);
+      S.workers[ids[i]] -= take; over -= take;
+    }
+  }
+}
+
+// distribute free workers to under-staffed job buildings (priority by build order)
+function autoAssignWorkers() {
+  clampWorkers();
+  if (!S.autoAssign) return;
+  let free = freeWorkers();
+  if (free <= 0) return;
+  for (const b of BUILDINGS) {
+    if (!b.jobs || (S.buildings[b.id]||0) === 0) continue;
+    const cap = buildingCapacity(b.id);
+    const cur = S.workers[b.id]||0;
+    const room = cap - cur;
+    if (room > 0) {
+      const add = Math.min(room, free);
+      S.workers[b.id] = cur + add;
+      free -= add;
+      if (free <= 0) break;
+    }
+  }
+}
+
+// staffing ratio of a specific building (0..1)
+function buildingStaffing(id) {
+  const cap = buildingCapacity(id);
+  if (cap <= 0) return 0;
+  return Math.min((S.workers[id]||0) / cap, 1);
+}
+
+// per-worker, per-second cycles for a craft building (independent of how many built)
+function craftCyclesPerWorker(bid) {
+  const c = CRAFTS[bid];
+  const b = BUILDINGS.find(x=>x.id===bid);
+  if (!c || !b || !b.jobs) return 0;
+  return (c.rate / b.jobs) * craftRateMult();
+}
+// returns { in:{res:perWorkerPerSec}, out:{...} } for one worker at full effect
+function craftPerWorker(bid) {
+  const c = CRAFTS[bid];
+  const cyc = craftCyclesPerWorker(bid);
+  const inp = {}, outp = {};
+  for (const r in c.in) inp[r] = c.in[r] * cyc;
+  for (const r in c.out) outp[r] = c.out[r] * cyc;
+  return { in: inp, out: outp };
+}
+
+/* base production per second from buildings (per-building staffing applied) */
+function baseProduction() {
+  const out = {}; for (const k in RES) out[k]=0;
+  for (const b of BUILDINGS) {
+    const n = S.buildings[b.id]||0;
+    if (!n || !b.prod) continue;
+    const staff = b.jobs ? buildingStaffing(b.id) : 1;
+    for (const r in b.prod) {
+      out[r] += b.prod[r] * n * staff * prodMult(r);
+    }
+  }
+  return out;
+}
+
+/* net production including crafts consumption/output */
+function netProduction() {
+  const net = baseProduction();
+  // crafts
+  for (const bid in CRAFTS) {
+    const c = CRAFTS[bid];
+    const n = S.buildings[bid]||0;
+    if (!n) continue;
+    if (c.needTech && !S.tech[c.needTech]) continue;
+    const staff = buildingStaffing(bid);
+    const cycles = c.rate * n * staff * craftRateMult();
+    for (const r in c.in) net[r] -= c.in[r]*cycles;
+    for (const r in c.out) net[r] += c.out[r]*cycles;
+  }
+  // pop food consumption — ogni abitante mangia
+  net.food -= S.pop * FOOD_PER_POP;
+  return net;
+}
+
+/* ============================================================
+   TICK
+   ============================================================ */
+function tick(dt) {
+  // dt in seconds
+  clampWorkers();
+  // 1. base production
+  const bp = baseProduction();
+  for (const r in bp) S.res[r] += bp[r]*dt;
+
+  // 2. crafts (clamped to inputs, scaled by per-building staffing)
+  for (const bid in CRAFTS) {
+    const c = CRAFTS[bid];
+    const n = S.buildings[bid]||0;
+    if (!n) continue;
+    if (c.needTech && !S.tech[c.needTech]) continue;
+    const staff = buildingStaffing(bid);
+    let cycles = c.rate * n * staff * craftRateMult() * dt;
+    // clamp by inputs
+    for (const r in c.in) {
+      const possible = S.res[r] / c.in[r];
+      cycles = Math.min(cycles, possible);
+    }
+    if (cycles <= 0) continue;
+    for (const r in c.in) S.res[r] -= c.in[r]*cycles;
+    for (const r in c.out) S.res[r] += c.out[r]*cycles;
+  }
+
+  // 3. population dynamics — ogni abitante consuma cibo
+  const cap = popCapacity();
+  S.res.food -= S.pop * FOOD_PER_POP * dt;
+  if (S.res.food < 0) {
+    // starvation
+    S.res.food = 0;
+    S.pop = Math.max(1, S.pop - S.pop*0.05*dt);
+  } else if (S.pop < cap && S.res.food > 5) {
+    // grow toward cap, slow
+    const growth = Math.max(0.003, S.pop * 0.005) * dt;
+    S.pop = Math.min(cap, S.pop + growth);
+  }
+
+  // auto-assign newly available workers to open jobs
+  autoAssignWorkers();
+
+  // clamp negatives
+  for (const r in S.res) if (S.res[r] < 0) S.res[r] = 0;
+  // clamp alla capacità di stoccaggio (eccesso perso)
+  clampResCaps(S);
+}
+
+/* ============================================================
+   ACTIONS
+   ============================================================ */
+function gather(action) {
+  const amt = action.amt * gatherMult(action.res) * (1 + Math.floor(S.pop)*GATHER_POP_BONUS);
+  S.res[action.res] += amt;
+  renderResources();
+}
+
+function canAfford(cost) {
+  for (const r in cost) if (S.res[r] < cost[r]) return false;
+  return true;
+}
+function buildingCost(b) {
+  const n = S.buildings[b.id]||0;
+  const mult = Math.pow(1.15, n) * buildCostMult();
+  const cost = {};
+  for (const r in b.cost) cost[r] = b.cost[r]*mult;
+  return cost;
+}
+function buyBuilding(b) {
+  const cost = buildingCost(b);
+  if (!canAfford(cost)) return;
+  for (const r in cost) S.res[r] -= cost[r];
+  S.buildings[b.id] = (S.buildings[b.id]||0)+1;
+  if (b.popCap) addLog(`Costruita una ${b.name}. La popolazione può crescere.`);
+  autoAssignWorkers();
+  renderAll();
+}
+
+/* Abbatte 1 edificio: nessun rimborso. Libera i lavoratori in eccesso. */
+function sellBuilding(b) {
+  const n = S.buildings[b.id]||0;
+  if (n <= 0) return;
+  S.buildings[b.id] = n - 1;
+  if (S.buildings[b.id] <= 0) delete S.buildings[b.id];
+  clampWorkers();          // riallinea i lavoratori alla nuova capacità
+  autoAssignWorkers();     // ridistribuisce quelli liberati
+  addLog(`Abbattuta una ${b.name}.`);
+  renderAll();
+}
+
+/* ---------- Worker assignment ---------- */
+function addWorker(id, n=1) {
+  if (!S.workers) S.workers = {};
+  const cap = buildingCapacity(id);
+  const cur = S.workers[id]||0;
+  const room = Math.min(cap - cur, freeWorkers(), n);
+  if (room > 0) { S.workers[id] = cur + room; renderAll(); }
+}
+function removeWorker(id, n=1) {
+  if (!S.workers || !S.workers[id]) return;
+  S.workers[id] = Math.max(0, S.workers[id] - n);
+  renderAll();
+}
+function maxWorker(id) {
+  if (!S.workers) S.workers = {};
+  const cap = buildingCapacity(id);
+  const cur = S.workers[id]||0;
+  const add = Math.min(cap - cur, freeWorkers());
+  if (add > 0) { S.workers[id] = cur + add; renderAll(); }
+}
+function clearWorker(id) {
+  if (S.workers && S.workers[id]) { S.workers[id] = 0; renderAll(); }
+}
+function toggleAutoAssign() {
+  S.autoAssign = !S.autoAssign;
+  if (S.autoAssign) autoAssignWorkers();
+  renderAll();
+}
+
+function buyTech(t) {
+  if (S.tech[t.id]) return;
+  if (!canAfford(t.cost)) return;
+  for (const r in t.cost) S.res[r] -= t.cost[r];
+  S.tech[t.id] = true;
+  addLog(`Scoperta: <b>${t.name}</b>.`, true);
+  renderAll();
+}
+
+/* ---------- Era advance ---------- */
+function eraReqMet() {
+  const era = ERAS[S.era-1];
+  for (const r in era.req) if (S.res[r] < era.req[r]) return false;
+  return true;
+}
+function tryAdvanceEra() {
+  if (S.era >= ERAS.length) return;
+  if (!eraReqMet()) return;
+  // consume requirements
+  const era = ERAS[S.era-1];
+  for (const r in era.req) S.res[r] -= era.req[r];
+  S.era++;
+  const ne = ERAS[S.era-1];
+  addLog(`⟡ La civiltà avanza all'<b>${ne.name}</b>! ⟡`, true);
+  renderAll();
+}
+
+/* ============================================================
+   BOT — economia completa simulata + classifica
+   Ogni bot ha uno stato con lo stesso formato del giocatore e gira
+   sullo stesso modello economico, con una IA che compra edifici,
+   ricerca tecnologie e avanza di era.
+   ============================================================ */
+const BOT_NAME_PARTS = ['Vel','Tor','Kha','Mor','Sel','Dra','Yth','Bran','Cor','Aza','Nor','Tisha','Vor','Eld','Run','Sygg'];
+const BOT_NAME_SUFFIX = ['ia','heim','gard','os','un','ara','wyn','mar','oth','esh','dor','vik'];
+// leggera variazione di "abilità" per rendere i bot diversi a parità di civiltà
+function botSkill() { return 0.7 + Math.random()*0.6; } // 0.7..1.3
+
+function makeBotName() {
+  const a = BOT_NAME_PARTS[Math.floor(Math.random()*BOT_NAME_PARTS.length)];
+  const b = BOT_NAME_SUFFIX[Math.floor(Math.random()*BOT_NAME_SUFFIX.length)];
+  return a + b;
+}
+
+// crea N bot scegliendo civiltà diverse da quella del giocatore
+function makeBots(playerCivId, n) {
+  const pool = CIVS.filter(c=>c.id!==playerCivId);
+  // mescola
+  for (let i=pool.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [pool[i],pool[j]]=[pool[j],pool[i]]; }
+  const bots = [];
+  const count = Math.min(n, pool.length);
+  for (let i=0;i<count;i++) {
+    const civ = pool[i];
+    const res = {}; for (const k in RES) res[k]=0;
+    for (const k in (civ.start||{})) res[k] += civ.start[k];
+    bots.push({
+      name: makeBotName(),
+      civ: civ.id,
+      res, buildings:{}, workers:{}, tech:{},
+      era:1, pop:1, skill: botSkill(),
+    });
+  }
+  return bots;
+}
+
+/* ---- moltiplicatori parametrizzati sullo stato del bot ---- */
+function bCivMods(b){ const c=CIVS.find(x=>x.id===b.civ); return c?(c.mods||{}):{}; }
+function bTechMult(b,key){ let m=1; for(const t of TECH){ if(b.tech[t.id]&&t.effect&&t.effect[key]!==undefined) m*=t.effect[key]; } return m; }
+function bProdMult(b,r){
+  const cm=bCivMods(b); let m=PROD_BALANCE;
+  m*=(cm.prodAll||1)*bTechMult(b,'prodAll');
+  if(r==='food') m*=(cm.prodFood||1)*bTechMult(b,'prodFood');
+  if(r==='wood') m*=(cm.prodWood||1);
+  if(r==='stone')m*=(cm.prodStone||1);
+  if(r==='ore')  m*=(cm.prodOre||1);
+  if(r==='science')m*=(cm.prodSci||1)*bTechMult(b,'prodSci');
+  if(r==='coin') m*=(cm.prodCoin||1);
+  return m;
+}
+function bCraftRateMult(b){ const cm=bCivMods(b); return (cm.craftRate||1)*PROD_BALANCE; }
+function bBuildCostMult(b){ const cm=bCivMods(b); return (cm.buildCost||1)*bTechMult(b,'buildCost'); }
+function bPopCapMult(b){ const cm=bCivMods(b); return (cm.popCap||1)*bTechMult(b,'popCap'); }
+function bPopCapacity(b){ let cap=1; for(const x of BUILDINGS) if(x.popCap) cap+=(b.buildings[x.id]||0)*x.popCap; return Math.floor(cap*bPopCapMult(b)); }
+function bBuildingCapacity(b,id){ const x=BUILDINGS.find(y=>y.id===id); if(!x||!x.jobs)return 0; return (b.buildings[id]||0)*x.jobs; }
+function bWorkforce(b){ return Math.floor(b.pop); }
+function bAssigned(b){ let s=0; for(const id in b.workers) s+=b.workers[id]||0; return s; }
+function bFree(b){ return Math.max(0, bWorkforce(b)-bAssigned(b)); }
+function bStaffing(b,id){ const cap=bBuildingCapacity(b,id); return cap<=0?0:Math.min((b.workers[id]||0)/cap,1); }
+
+function bClampWorkers(b){
+  for(const id in b.workers){ const cap=bBuildingCapacity(b,id); if(b.workers[id]>cap)b.workers[id]=cap; if(b.workers[id]<0)b.workers[id]=0; if(cap===0)delete b.workers[id]; }
+  let over=bAssigned(b)-bWorkforce(b);
+  if(over>0){ const ids=Object.keys(b.workers); for(let i=ids.length-1;i>=0&&over>0;i--){ const take=Math.min(b.workers[ids[i]],over); b.workers[ids[i]]-=take; over-=take; } }
+}
+function bAutoAssign(b){
+  bClampWorkers(b);
+  let free=bFree(b); if(free<=0)return;
+  for(const x of BUILDINGS){ if(!x.jobs||(b.buildings[x.id]||0)===0)continue; const cap=bBuildingCapacity(b,x.id); const cur=b.workers[x.id]||0; const room=cap-cur; if(room>0){ const add=Math.min(room,free); b.workers[x.id]=cur+add; free-=add; if(free<=0)break; } }
+}
+
+function bBuildingCost(b,x){ const n=b.buildings[x.id]||0; const mult=Math.pow(1.15,n)*bBuildCostMult(b); const cost={}; for(const r in x.cost) cost[r]=x.cost[r]*mult; return cost; }
+function bCanAfford(b,cost){ for(const r in cost) if(b.res[r]<cost[r]) return false; return true; }
+
+/* IA d'acquisto: spende le risorse in modo plausibile.
+   Priorità: alloggi se pieni → magazzini se vicino al cap → produttori → manifatture.
+   La 'skill' regola quanto è efficiente. */
+function bTryBuild(b){
+  // valuta tutti gli edifici disponibili e compra il più "utile" accessibile
+  let best=null, bestScore=-1;
+  const popFull = b.pop >= bPopCapacity(b)*0.85;
+  for(const x of BUILDINGS){
+    if(x.era>b.era) continue;
+    const cost=bBuildingCost(b,x);
+    if(!bCanAfford(b,cost)) continue;
+    let score=1;
+    if(x.popCap){ score = popFull ? 6 : 1.5; }
+    else if(x.storage){
+      // utile se qualche risorsa stoccata è vicina al cap
+      let near=0; for(const r in x.storage){ const cap=resCapacity(r,b); if(cap!==Infinity && b.res[r]>=cap*0.9) near++; }
+      score = near>0 ? 5 : 0.8;
+    }
+    else if(x.prod && x.prod.science){ score=4; }       // conoscenza = chiave progressione
+    else if(x.craft){ score=3; }
+    else if(x.jobs){ score=2.5; }
+    // un po' di rumore × skill
+    score *= (0.8 + Math.random()*0.4) * b.skill;
+    if(score>bestScore){ bestScore=score; best=x; }
+  }
+  if(best){ const cost=bBuildingCost(b,best); for(const r in cost) b.res[r]-=cost[r]; b.buildings[best.id]=(b.buildings[best.id]||0)+1; bAutoAssign(b); return true; }
+  return false;
+}
+function bTryTech(b){
+  for(const t of TECH){
+    if(t.era>b.era||b.tech[t.id]) continue;
+    if(bCanAfford(b,t.cost)){
+      // i bot più abili ricercano prima; gli altri a volte rimandano
+      if(Math.random() < 0.5+0.4*b.skill){ for(const r in t.cost) b.res[r]-=t.cost[r]; b.tech[t.id]=true; return true; }
+    }
+  }
+  return false;
+}
+function bEraReqMet(b){ const era=ERAS[b.era-1]; for(const r in era.req) if(b.res[r]<era.req[r]) return false; return true; }
+function bTryAdvance(b){
+  if(b.era>=ERAS.length) return;
+  if(!bEraReqMet(b)) return;
+  const era=ERAS[b.era-1];
+  for(const r in era.req) b.res[r]-=era.req[r];
+  b.era++;
+}
+
+/* un tick economico completo per un bot */
+function simulateBot(b, dt){
+  if(!b.workers) b.workers={};
+  bClampWorkers(b);
+  // 0. raccolta base "manuale" simulata: i bot lavorano come un giocatore attivo.
+  //    scala con popolazione e skill, distribuita sulle risorse base dell'era.
+  const cm = bCivMods(b);
+  const handRate = (0.6 + b.pop*0.05) * b.skill;
+  b.res.food  = (b.res.food||0)  + handRate*dt * (cm.gatherAll||1) * (cm.gatherFood||1) * bTechMult(b,'gatherFood');
+  b.res.wood  = (b.res.wood||0)  + handRate*dt * (cm.gatherAll||1);
+  b.res.stone = (b.res.stone||0) + handRate*dt * (cm.gatherAll||1);
+  b.res.science = (b.res.science||0) + handRate*0.4*dt * (cm.gatherAll||1) * (cm.prodSci||1) * bTechMult(b,'prodSci');
+  // 1. produzione base
+  for(const x of BUILDINGS){
+    const n=b.buildings[x.id]||0; if(!n||!x.prod) continue;
+    const staff = x.jobs ? bStaffing(b,x.id) : 1;
+    for(const r in x.prod) b.res[r]=(b.res[r]||0)+x.prod[r]*n*staff*bProdMult(b,r)*dt;
+  }
+  // 2. manifatture
+  for(const bid in CRAFTS){
+    const c=CRAFTS[bid]; const n=b.buildings[bid]||0; if(!n) continue;
+    if(c.needTech && !b.tech[c.needTech]) continue;
+    const staff=bStaffing(b,bid);
+    let cycles=c.rate*n*staff*bCraftRateMult(b)*dt;
+    for(const r in c.in){ const possible=b.res[r]/c.in[r]; cycles=Math.min(cycles,possible); }
+    if(cycles<=0) continue;
+    for(const r in c.in) b.res[r]-=c.in[r]*cycles;
+    for(const r in c.out) b.res[r]=(b.res[r]||0)+c.out[r]*cycles;
+  }
+  // 3. popolazione
+  const cap=bPopCapacity(b);
+  b.res.food-=b.pop*FOOD_PER_POP*dt;
+  if(b.res.food<0){ b.res.food=0; b.pop=Math.max(1,b.pop-b.pop*0.05*dt); }
+  else if(b.pop<cap && b.res.food>5){ b.pop=Math.min(cap, b.pop+Math.max(0.003,b.pop*0.005)*dt); }
+  bSmartAssign(b);
+  // clamp negativi e cap
+  for(const r in b.res) if(b.res[r]<0) b.res[r]=0;
+  clampResCaps(b);
+  // 4. decisioni IA (non a ogni frame: ~ogni secondo simulato)
+  b._accum=(b._accum||0)+dt;
+  if(b._accum>=1){
+    b._accum=0;
+    let guard=0;
+    while(bTryBuild(b) && guard++<3){}  // qualche acquisto per ciclo
+    bTryTech(b);
+    bTryAdvance(b);
+  }
+}
+
+/* assegnazione lavoratori "intelligente" per i bot:
+   non rifornisce le manifatture il cui prodotto è già al massimo
+   (così l'input si accumula verso i requisiti d'era invece di sprecarsi),
+   e protegge dal consumo le risorse richieste per avanzare di era. */
+function bSmartAssign(b){
+  bClampWorkers(b);
+  // risorse necessarie all'avanzamento di cui non ho ancora abbastanza
+  const era = ERAS[b.era-1];
+  const needed = {};
+  if (era && b.era < ERAS.length) {
+    for (const r in era.req) if ((b.res[r]||0) < era.req[r]) needed[r] = true;
+  }
+  // una manifattura va fermata se l'output è pieno, OPPURE se consuma una
+  // risorsa che mi serve per avanzare (e che non ho ancora accumulato a sufficienza)
+  function shouldStop(bid){
+    const c = CRAFTS[bid];
+    let outFull = true;
+    for(const r in c.out){ const cp=resCapacity(r,b); if(!(cp!==Infinity && b.res[r]>=cp-0.5)){ outFull=false; break; } }
+    if (outFull) return true;
+    // se consuma un input richiesto per l'era e l'output NON è esso stesso richiesto, fermala
+    let consumesNeeded=false, producesNeeded=false;
+    for(const r in c.in)  if(needed[r]) consumesNeeded=true;
+    for(const r in c.out) if(needed[r]) producesNeeded=true;
+    if (consumesNeeded && !producesNeeded) return true;
+    return false;
+  }
+  // svuota le manifatture da fermare
+  for(const bid in CRAFTS){
+    if(!(b.buildings[bid]>0)) continue;
+    if(shouldStop(bid)) b.workers[bid]=0;
+  }
+  let free=bFree(b); if(free<=0) return;
+  // PASSATA 1: priorità alle manifatture che producono una risorsa richiesta per l'era
+  if (Object.keys(needed).length) {
+    for(const bid in CRAFTS){
+      if(!(b.buildings[bid]>0)) continue;
+      const c=CRAFTS[bid]; if(c.needTech && !b.tech[c.needTech]) continue;
+      let producesNeeded=false; for(const r in c.out) if(needed[r]) producesNeeded=true;
+      if(!producesNeeded) continue;
+      const capW=bBuildingCapacity(b,bid); const cur=b.workers[bid]||0; const room=capW-cur;
+      if(room>0){ const add=Math.min(room,free); b.workers[bid]=cur+add; free-=add; if(free<=0)return; }
+    }
+  }
+  // PASSATA 2: distribuisci i restanti sulle altre postazioni
+  for(const x of BUILDINGS){
+    if(!x.jobs||(b.buildings[x.id]||0)===0) continue;
+    if(CRAFTS[x.id] && shouldStop(x.id)) continue;
+    const capW=bBuildingCapacity(b,x.id); const cur=b.workers[x.id]||0; const room=capW-cur;
+    if(room>0){ const add=Math.min(room,free); b.workers[x.id]=cur+add; free-=add; if(free<=0)break; }
+  }
+}
+
+/* punteggio combinato era + popolazione + conoscenza */
+function civScore(st){
+  const eraW = (st.era-1) * 10000;       // peso forte all'era
+  const popW = Math.log10(Math.max(1,st.pop)) * 1500;
+  const sciW = Math.log10(Math.max(1,(st.res&&st.res.science)||0)+1) * 1200;
+  return Math.floor(eraW + popW + sciW);
+}
+
+/* simula i bot del giocatore corrente */
+function simulateBots(dt){
+  if(!S || !S.bots) return;
+  // nessun recupero offline: avanza solo del tempo reale ricevuto
+  const step = Math.min(dt, 0.25);
+  for(const b of S.bots) simulateBot(b, step);
+}
+
+/* classifica completa: giocatore + bot, ordinata per punteggio */
+function leaderboard(){
+  if(!S) return [];
+  const civP = CIVS.find(c=>c.id===S.civ);
+  const rows = [{
+    name: S.name || 'La tua civiltà', civName:civP?civP.name:'—', isPlayer:true,
+    era:S.era, pop:S.pop, science:S.res.science||0, score:civScore(S),
+  }];
+  for(const b of (S.bots||[])){
+    const civ=CIVS.find(c=>c.id===b.civ);
+    rows.push({ name:b.name, civName:civ?civ.name:'—', isPlayer:false,
+      era:b.era, pop:b.pop, science:b.res.science||0, score:civScore(b) });
+  }
+  rows.sort((a,b)=>b.score-a.score);
+  return rows;
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+
+function renderResources() {
+  const net = netProduction();
+  const cont = document.getElementById('resList');
+  let html = '';
+  const cats = [['base','Risorse Base'],['derived','Materiali Lavorati']];
+  for (const [cat,label] of cats) {
+    let any = false;
+    let block = `<div class="res-cat">${label}</div>`;
+    for (const k in RES) {
+      const r = RES[k];
+      if (r.cat !== cat) continue;
+      if (r.eraReq && S.era < r.eraReq) continue;
+      any = true;
+      const rate = net[k]||0;
+      const rcls = rate>0?'pos':(rate<0?'neg':'');
+      const cap = resCapacity(k);
+      const full = cap !== Infinity && S.res[k] >= cap - 0.5;
+      const capStr = cap === Infinity ? '' :
+        `<span class="rcap">/${fmtRes(cap)}</span>`;
+      block += `<div class="res">
+        <span class="rname"><span class="ricon">${r.icon}</span>${r.name}</span>
+        <span class="rval ${full?'rfull':''}">${fmtRes(S.res[k])}${capStr}</span>
+        <span class="rrate ${rcls}">${Math.abs(rate)>0.001?fmtRate(rate):''}</span>
+      </div>`;
+      // mostra il consumo della popolazione sotto il cibo
+      if (k === 'food') {
+        const eaten = S.pop * FOOD_PER_POP;
+        const warn = rate < 0;
+        block += `<div class="res-sub ${warn?'warn':''}">
+          🍽️ ${Math.floor(S.pop)} abitanti consumano ${fmtSmall(eaten)}/s${warn?' — scorte in calo!':''}
+        </div>`;
+      }
+    }
+    if (any) html += block;
+  }
+  cont.innerHTML = html;
+
+  // header stats
+  document.getElementById('popStat').textContent = fmt(S.pop);
+  document.getElementById('popCapStat').textContent = fmt(popCapacity());
+  document.getElementById('occStat').textContent = fmt(assignedWorkers());
+  document.getElementById('freeStat').textContent = fmt(freeWorkers());
+  document.getElementById('sciStat').textContent = fmt(S.res.science);
+}
+
+function renderEra() {
+  const era = ERAS[S.era-1];
+  document.getElementById('eraName').textContent = era.name;
+  document.getElementById('eraNum').textContent = `[ Era ${S.era} / ${ERAS.length} ]`;
+  document.getElementById('eraDesc').textContent = era.desc;
+
+  // progress = min ratio across reqs
+  let minRatio = 1;
+  const parts = [];
+  for (const r in era.req) {
+    const ratio = Math.min(S.res[r]/era.req[r], 1);
+    minRatio = Math.min(minRatio, ratio);
+    const done = S.res[r] >= era.req[r];
+    parts.push(`<span class="req ${done?'req-ok':''}">${RES[r].icon}<b class="req-cur">${fmt(S.res[r])}</b><span class="req-sep">/</span><span class="req-max">${fmt(era.req[r])}</span></span>`);
+  }
+  document.getElementById('eraBar').style.width = (minRatio*100).toFixed(1)+'%';
+  const eraReqEl = document.getElementById('eraReq');
+  if (S.era >= ERAS.length) {
+    eraReqEl.textContent = 'Apice raggiunto — continua a espandere la tua colonia stellare.';
+  } else {
+    eraReqEl.innerHTML = '<span class="req-lead">Per avanzare:</span> ' + parts.join('');
+  }
+
+  const note = document.getElementById('ascendNote');
+  if (S.era < ERAS.length && eraReqMet()) {
+    note.style.display = 'block';
+    note.innerHTML = `⟡ Pronti ad avanzare! Le risorse richieste verranno consumate. ⟡<br><button class="buy-btn" style="margin-top:6px;" onclick="tryAdvanceEra()">Avanza di Era</button>`;
+  } else {
+    note.style.display = 'none';
+  }
+}
+
+function renderGather() {
+  const cont = document.getElementById('gatherGrid');
+  cont.innerHTML = GATHER.map(a => {
+    const m = a.amt * gatherMult(a.res) * (1 + Math.floor(S.pop)*GATHER_POP_BONUS);
+    return `<button class="gather-btn" data-g="${a.id}">${a.label}
+      <small>+${fmt(m)} ${RES[a.res].name}</small></button>`;
+  }).join('');
+  cont.querySelectorAll('button').forEach(btn=>{
+    btn.onclick = ()=> gather(GATHER.find(a=>a.id===btn.dataset.g));
+  });
+}
+
+function costStr(cost) {
+  return Object.keys(cost).map(r=>{
+    const ok = S.res[r] >= cost[r];
+    return `<span class="${ok?'ok':''}">${RES[r].icon}${fmt(cost[r])}</span>`;
+  }).join('  ');
+}
+
+function renderTab() {
+  const cont = document.getElementById('tabContent');
+  let html = '';
+
+  // workforce summary bar
+  html += `<div class="workforce-bar">
+    <span>👥 Manodopera: <b>${assignedWorkers()}</b> assegnati · <b class="${freeWorkers()>0?'wf-free':''}">${freeWorkers()}</b> liberi / ${totalWorkforce()} totali</span>
+    <button class="wf-auto ${S.autoAssign?'on':''}" id="autoAssignBtn">Auto ${S.autoAssign?'ON':'OFF'}</button>
+  </div>`;
+
+  // genera la card di un singolo edificio
+  {
+    const buildingCard = (b) => {
+      const n = S.buildings[b.id]||0;
+      const cost = buildingCost(b);
+      const aff = canAfford(cost);
+      let prodTxt = [];
+      if (b.prod) for (const r in b.prod) {
+        if (b.jobs) prodTxt.push(`${RES[r].icon}+${fmtSmall(b.prod[r]/b.jobs)}/s a lavoratore`);
+        else prodTxt.push(`${RES[r].icon}+${fmt(b.prod[r])}/s`);
+      }
+      if (b.popCap) prodTxt.push(`🏠+${b.popCap} alloggi`);
+      if (b.storage) prodTxt.push(`📦${Object.keys(b.storage).map(r=>RES[r].icon+'+'+fmt(b.storage[r])).join(' ')}`);
+      if (b.jobs) prodTxt.push(`👤${b.jobs} posti/edificio`);
+      if (b.craft && CRAFTS[b.id]) prodTxt.push(`⚒ vedi scheda Manifatture`);
+
+      // worker control for job buildings that exist
+      let workerHtml = '';
+      if (b.jobs && n > 0) {
+        const cap = buildingCapacity(b.id);
+        const cur = S.workers[b.id]||0;
+        const pct = cap>0 ? Math.round(cur/cap*100) : 0;
+        workerHtml = `<div class="worker-row">
+          <div class="worker-info">👤 <b>${cur}</b>/${cap} lavoratori <span class="worker-pct">(${pct}% reso)</span></div>
+          <div class="worker-ctrls">
+            <button class="wbtn" data-wclear="${b.id}" ${cur<=0?'disabled':''}>0</button>
+            <button class="wbtn" data-wdown="${b.id}" ${cur<=0?'disabled':''}>−</button>
+            <button class="wbtn" data-wup="${b.id}" ${(cur>=cap||freeWorkers()<=0)?'disabled':''}>+</button>
+            <button class="wbtn" data-wmax="${b.id}" ${(cur>=cap||freeWorkers()<=0)?'disabled':''}>max</button>
+          </div>
+        </div>`;
+      }
+
+      return `<div class="item">
+        <div class="ihead"><span class="iname">${b.name}</span><span class="icount">×${n}</span></div>
+        <div class="idesc">${b.desc} — ${prodTxt.join(', ')}</div>
+        ${workerHtml}
+        <div class="icost">${costStr(cost)}</div>
+        <button class="buy-btn" data-b="${b.id}" ${aff?'':'disabled'}>Costruisci</button>
+        <button class="sell-btn" data-sell="${b.id}" ${n<=0?'disabled':''}>Abbatti</button>
+      </div>`;
+    };
+
+    // raggruppa gli edifici disponibili per categoria
+    const available = BUILDINGS.filter(b => b.era <= S.era);
+    for (const cat of BUILD_CATEGORIES) {
+      const inCat = available.filter(b => buildingCategory(b) === cat.key);
+      if (!inCat.length) continue;
+      html += `<div class="build-group">
+        <div class="build-cat">
+          <span class="build-cat-label">${cat.label}</span>
+          <span class="build-cat-count">${inCat.length}</span>
+          <span class="build-cat-desc">${cat.desc}</span>
+        </div>
+        ${inCat.map(buildingCard).join('')}
+      </div>`;
+    }
+  }
+
+  cont.innerHTML = html;
+  cont.querySelectorAll('button[data-b]').forEach(btn=>{
+    btn.onclick = ()=> buyBuilding(BUILDINGS.find(b=>b.id===btn.dataset.b));
+  });
+  cont.querySelectorAll('button[data-sell]').forEach(btn=>{
+    btn.onclick = ()=> sellBuilding(BUILDINGS.find(b=>b.id===btn.dataset.sell));
+  });
+  cont.querySelectorAll('button[data-wup]').forEach(b=> b.onclick = ()=> addWorker(b.dataset.wup,1));
+  cont.querySelectorAll('button[data-wdown]').forEach(b=> b.onclick = ()=> removeWorker(b.dataset.wdown,1));
+  cont.querySelectorAll('button[data-wmax]').forEach(b=> b.onclick = ()=> maxWorker(b.dataset.wmax));
+  cont.querySelectorAll('button[data-wclear]').forEach(b=> b.onclick = ()=> clearWorker(b.dataset.wclear));
+  const aa = document.getElementById('autoAssignBtn');
+  if (aa) aa.onclick = toggleAutoAssign;
+}
+
+function renderTech() {
+  const cont = document.getElementById('techContent');
+  if (!cont) return;
+  let html = '';
+  let shown = false;
+  for (const t of TECH) {
+    if (t.era > S.era) continue;
+    if (S.tech[t.id]) continue;
+    shown = true;
+    const aff = canAfford(t.cost);
+    html += `<div class="item">
+      <div class="ihead"><span class="iname">${t.name}</span><span class="icount">Era ${t.era}</span></div>
+      <div class="idesc">${t.desc}</div>
+      <div class="icost">${costStr(t.cost)}</div>
+      <button class="buy-btn" data-t="${t.id}" ${aff?'':'disabled'}>Ricerca</button>
+    </div>`;
+  }
+  // elenco delle tecnologie già scoperte
+  const done = TECH.filter(t=>S.tech[t.id]);
+  if (done.length) {
+    html += `<div class="res-cat" style="margin-top:10px;">Già scoperte</div>`;
+    html += done.map(t=>`<div class="item" style="padding:6px 12px;"><span class="iname" style="font-size:13px;">✓ ${t.name}</span></div>`).join('');
+  }
+  if (!shown && !done.length) html = '<div class="hint">Nessuna tecnologia disponibile in questa era.</div>';
+
+  cont.innerHTML = html;
+  cont.querySelectorAll('button[data-t]').forEach(btn=>{
+    btn.onclick = ()=> buyTech(TECH.find(t=>t.id===btn.dataset.t));
+  });
+}
+
+function renderCrafts() {
+  const cont = document.getElementById('craftContent');
+  let html = `<div class="hint" style="margin-bottom:10px;">Le manifatture convertono risorse solo se assegni lavoratori. La velocità scala con i lavoratori sui posti disponibili.</div>`;
+  html += `<div class="workforce-bar">
+    <span>👥 Manodopera: <b>${assignedWorkers()}</b> assegnati · <b class="${freeWorkers()>0?'wf-free':''}">${freeWorkers()}</b> liberi / ${totalWorkforce()} totali</span>
+  </div>`;
+  let any = false;
+  for (const bid in CRAFTS) {
+    const c = CRAFTS[bid];
+    const b = BUILDINGS.find(x=>x.id===bid);
+    if (b.era > S.era) continue;
+    any = true;
+    const n = S.buildings[bid]||0;
+    const techOk = !c.needTech || S.tech[c.needTech];
+
+    // per-worker rates
+    const pw = craftPerWorker(bid);
+    const inPW  = Object.keys(pw.in ).map(r=>`${RES[r].icon}${fmtSmall(pw.in[r])}/s`).join(' + ');
+    const outPW = Object.keys(pw.out).map(r=>`${RES[r].icon}${fmtSmall(pw.out[r])}/s`).join(' + ');
+
+    let workerHtml = '';
+    let status;
+    if (!n) status = 'Nessun edificio';
+    else if (!techOk) status = 'Tecnologia mancante';
+    else {
+      const cap = buildingCapacity(bid);
+      const cur = S.workers[bid]||0;
+      status = cur>0 ? 'Attiva' : 'Inattiva (0 lavoratori)';
+      // current totals = per-worker × assigned workers
+      const totIn  = Object.keys(pw.in ).map(r=>`${RES[r].icon}${fmtSmall(pw.in[r]*cur)}/s`).join(' + ') || '—';
+      const totOut = Object.keys(pw.out).map(r=>`${RES[r].icon}${fmtSmall(pw.out[r]*cur)}/s`).join(' + ') || '—';
+      workerHtml = `<div class="worker-row">
+        <div class="worker-info">👤 <b>${cur}</b>/${cap} lavoratori</div>
+        <div class="worker-ctrls">
+          <button class="wbtn" data-wclear="${bid}" ${cur<=0?'disabled':''}>0</button>
+          <button class="wbtn" data-wdown="${bid}" ${cur<=0?'disabled':''}>−</button>
+          <button class="wbtn" data-wup="${bid}" ${(cur>=cap||freeWorkers()<=0)?'disabled':''}>+</button>
+          <button class="wbtn" data-wmax="${bid}" ${(cur>=cap||freeWorkers()<=0)?'disabled':''}>max</button>
+        </div>
+      </div>
+      <div class="craft-totals">${status} · ora consuma <span class="cons">${totIn}</span> · produce <span class="prod">${totOut}</span></div>`;
+    }
+    const lockNote = (!n || !techOk) ? `<div class="craft-totals">${status}</div>` : '';
+    html += `<div class="item ${(!n||!techOk)?'locked':''}">
+      <div class="ihead"><span class="iname">${b.name} → ${c.name}</span><span class="icount">×${n}</span></div>
+      <div class="idesc">${b.desc}</div>
+      <div class="craft-perworker">Per lavoratore: consuma <span class="cons">${inPW}</span> → produce <span class="prod">${outPW}</span></div>
+      ${lockNote}
+      ${workerHtml}
+      ${n>0?`<button class="sell-btn" data-sell="${bid}">Abbatti</button>`:''}
+    </div>`;
+  }
+  if (!any) html += '<div class="hint">Nessuna manifattura disponibile in questa era.</div>';
+  cont.innerHTML = html;
+  cont.querySelectorAll('button[data-wup]').forEach(b=> b.onclick = ()=> addWorker(b.dataset.wup,1));
+  cont.querySelectorAll('button[data-wdown]').forEach(b=> b.onclick = ()=> removeWorker(b.dataset.wdown,1));
+  cont.querySelectorAll('button[data-wmax]').forEach(b=> b.onclick = ()=> maxWorker(b.dataset.wmax));
+  cont.querySelectorAll('button[data-wclear]').forEach(b=> b.onclick = ()=> clearWorker(b.dataset.wclear));
+  cont.querySelectorAll('button[data-sell]').forEach(b=> b.onclick = ()=> sellBuilding(BUILDINGS.find(x=>x.id===b.dataset.sell)));
+}
+
+function addLog(msg, epic=false) {
+  const t = new Date();
+  const ts = `${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
+  S.log.unshift({msg, epic, ts});
+  if (S.log.length > 60) S.log.pop();
+  renderLog();
+}
+function renderLog() {
+  document.getElementById('log').innerHTML = S.log.map(e=>
+    `<div class="e ${e.epic?'epic':''}"><span class="t">${e.ts}</span>${e.msg}</div>`).join('');
+}
+
+function renderLeaderboard() {
+  const cont = document.getElementById('rankList');
+  if (!cont) return;
+  const rows = leaderboard();
+  const medals = ['🥇','🥈','🥉'];
+  cont.innerHTML = rows.map((r,i)=>{
+    const era = ERAS[(r.era||1)-1];
+    const medal = i<3 ? `<span class="rank-medal">${medals[i]}</span>` : `<span class="rank-pos">${i+1}</span>`;
+    return `<div class="rank-row ${r.isPlayer?'me':''}">
+      ${medal}
+      <div class="rank-main">
+        <div class="rank-name">${r.name}${r.isPlayer?'<span class="me-tag">● TU</span>':''}</div>
+        <div class="rank-civ">${r.civName} — ${era?era.name:''} (Era ${r.era}/${ERAS.length})</div>
+      </div>
+      <div class="rank-stats">
+        <div class="rank-score">${fmt(r.score)} pt</div>
+        👥${fmt(r.pop)} · 📜${fmt(r.science)}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderAll() {
+  renderResources();
+  renderEra();
+  renderGather();
+  renderTab();
+  renderTech();
+  renderCrafts();
+  renderLeaderboard();
+  const civ = CIVS.find(c=>c.id===S.civ);
+  const dispName = S.name || (civ ? civ.name : '—');
+  document.getElementById('civTag').textContent = dispName;
+  document.getElementById('civTag').title = civ ? `Stirpe: ${civ.name}` : '';
+}
+
+/* ============================================================
+   CIV SELECT
+   ============================================================ */
+let pendingCivId = null;  // stirpe scelta in attesa del nome
+
+function renderCivSelect() {
+  const grid = document.getElementById('civGrid');
+  grid.innerHTML = CIVS.map(c=>`
+    <div class="civ-card" data-civ="${c.id}">
+      <div class="cn">${c.name}</div>
+      <div class="cf">${c.flavor}</div>
+      <div class="cb">▲ ${c.bonusTxt}</div>
+      <div class="cm">▼ ${c.malusTxt}</div>
+      <div class="cstart">Inizi: ${Object.keys(c.start||{}).length?Object.keys(c.start).map(r=>RES[r].icon+c.start[r]).join(' '):'mani vuote'}</div>
+    </div>`).join('');
+  grid.querySelectorAll('.civ-card').forEach(card=>{
+    card.onclick = ()=> selectCiv(card.dataset.civ);
+  });
+  // reset pannello nome a ogni apertura
+  pendingCivId = null;
+  document.getElementById('namePanel').classList.remove('show');
+}
+
+// seleziona una stirpe e mostra il pannello per inserire il nome
+function selectCiv(civId) {
+  pendingCivId = civId;
+  const civ = CIVS.find(c=>c.id===civId);
+  // evidenzia la card scelta
+  document.querySelectorAll('.civ-card').forEach(card=>{
+    card.classList.toggle('selected', card.dataset.civ===civId);
+  });
+  document.getElementById('chosenCivName').textContent = civ ? civ.name : '—';
+  const input = document.getElementById('civNameInput');
+  input.value = civ ? civ.name : '';   // suggerisce il nome della stirpe come default
+  const panel = document.getElementById('namePanel');
+  panel.classList.add('show');
+  panel.scrollIntoView({behavior:'smooth', block:'center'});
+  input.focus();
+  input.select();
+}
+
+/* ---------- Slots overlay ---------- */
+function openSlots() {
+  renderSlots();
+  document.getElementById('civOverlay').style.display = 'none';
+  document.getElementById('slotsOverlay').style.display = 'block';
+}
+function openCivSelect(fromSlots) {
+  renderCivSelect();
+  document.getElementById('slotsOverlay').style.display = 'none';
+  document.getElementById('civOverlay').style.display = 'block';
+  // show "back" only if there are existing games to return to
+  document.getElementById('civBackBtn').style.display = (fromSlots && slotCount()>0) ? 'inline-block' : 'none';
+}
+
+function renderSlots() {
+  const list = document.getElementById('slotsList');
+  const ids = Object.keys(DB.slots);
+  if (!ids.length) {
+    list.innerHTML = `<div class="slot-empty">Nessuna partita salvata. Inizia una nuova partita qui sotto.</div>`;
+    return;
+  }
+  // sort: current first, then most recently played
+  ids.sort((a,b)=>{
+    if (a===curSlot) return -1; if (b===curSlot) return 1;
+    return (DB.slots[b].lastTick||0) - (DB.slots[a].lastTick||0);
+  });
+  list.innerHTML = ids.map(id=>{
+    const st = DB.slots[id];
+    const civ = CIVS.find(c=>c.id===st.civ);
+    const era = ERAS[(st.era||1)-1];
+    const isCur = id===curSlot;
+    const when = st.lastTick ? new Date(st.lastTick).toLocaleString('it-IT',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}) : '—';
+    return `<div class="slot ${isCur?'current':''}">
+      <div class="sinfo">
+        ${isCur?'<div class="scur-tag">● PARTITA IN CORSO</div>':''}
+        <div class="scn">${st.name || (civ?civ.name:'Civiltà')}</div>
+        <div class="sera">${civ?civ.name+' · ':''}${era?era.name:''} — Era ${st.era||1}/${ERAS.length} · Pop. ${fmt(st.pop||0)}</div>
+        <div class="smeta">Conoscenza ${fmt((st.res&&st.res.science)||0)} · ${when}</div>
+      </div>
+      <div class="sactions">
+        <button class="slot-load" data-load="${id}" ${isCur?'disabled':''}>${isCur?'Attiva':'Carica'}</button>
+        <button class="slot-del" data-del="${id}">Elimina</button>
+      </div>
+    </div>`;
+  }).join('');
+  list.querySelectorAll('button[data-load]').forEach(b=>{
+    b.onclick = ()=> loadSlot(b.dataset.load);
+  });
+  list.querySelectorAll('button[data-del]').forEach(b=>{
+    b.onclick = ()=>{
+      const st = DB.slots[b.dataset.del];
+      const civ = CIVS.find(c=>c.id===st.civ);
+      if (confirm(`Eliminare la partita "${civ?civ.name:'questa civiltà'}" (Era ${st.era||1})? L'azione è irreversibile.`)) {
+        deleteSlot(b.dataset.del);
+      }
+    };
+  });
+}
+function startGame(civId, civName) {
+  const id = 'slot' + (DB.nextId++);
+  S = freshState(civId, civName);
+  curSlot = id;
+  DB.slots[id] = S;
+  DB.current = id;
+  saveDB(DB);
+  const civ = CIVS.find(c=>c.id===civId);
+  hideOverlays();
+  addLog(`Nasce una nuova civiltà: <b>${S.name}</b> (${civ.name}). L'alba dell'Età della Pietra.`, true);
+  renderAll();
+  save();
+}
+
+function hideOverlays() {
+  document.getElementById('civOverlay').style.display = 'none';
+  document.getElementById('slotsOverlay').style.display = 'none';
+}
+
+/* ============================================================
+   TEMI
+   ============================================================ */
+const THEMES = [
+  { id:'parchment', name:'Pergamena' },
+  { id:'modern',    name:'Moderno' },
+  { id:'nebula',    name:'Nebulosa Porpora' },
+  { id:'aurora',    name:'Aurora Verde' },
+];
+const THEME_KEY = 'aeon_theme';
+
+function applyTheme(id) {
+  const t = THEMES.find(x=>x.id===id) ? id : THEMES[0].id;
+  document.body.setAttribute('data-theme', t);
+  try { localStorage.setItem(THEME_KEY, t); } catch(e){}
+}
+function currentTheme() {
+  return document.body.getAttribute('data-theme') || THEMES[0].id;
+}
+function cycleTheme() {
+  const i = THEMES.findIndex(t=>t.id===currentTheme());
+  const next = THEMES[(i+1) % THEMES.length];
+  applyTheme(next.id);
+  if (typeof addLog === 'function' && S) addLog(`Tema cambiato: <b>${next.name}</b>.`);
+}
+// applica il tema salvato all'avvio
+(function initTheme(){
+  let saved = THEMES[0].id;
+  try { const s = localStorage.getItem(THEME_KEY); if (s) saved = s; } catch(e){}
+  applyTheme(saved);
+})();
+
+/* ============================================================
+   SAVE / LOAD  — sistema multi-slot
+   ============================================================ */
+const SLOT_KEY = 'aeon_slots';      // { slots: {id: state}, current: id, nextId: n }
+const LEGACY_KEY = 'aeon_save';
+
+function loadDB() {
+  let db = { slots:{}, current:null, nextId:1 };
+  try {
+    const raw = localStorage.getItem(SLOT_KEY);
+    if (raw) db = JSON.parse(raw);
+  } catch(e){}
+  if (!db.slots) db.slots = {};
+  if (!db.nextId) db.nextId = 1;
+  // migrate legacy single save into a slot
+  try {
+    const legacy = localStorage.getItem(LEGACY_KEY);
+    if (legacy) {
+      const d = JSON.parse(legacy);
+      if (d && d.civ) {
+        const id = 'slot' + (db.nextId++);
+        db.slots[id] = d;
+        if (!db.current) db.current = id;
+      }
+      localStorage.removeItem(LEGACY_KEY);
+      saveDB(db);
+    }
+  } catch(e){}
+  return db;
+}
+function saveDB(db) {
+  try { localStorage.setItem(SLOT_KEY, JSON.stringify(db)); } catch(e){}
+  // se loggato e Firebase pronto, sincronizza anche sul cloud (in background)
+  cloudSync(db);
+}
+
+/* ---- Sincronizzazione cloud (Firebase) ---- */
+let curUser = null;        // utente Firebase loggato, o null (ospite)
+let cloudTimer = null;     // debounce per non scrivere a ogni tick
+function fbReady() { return window.AeonFB && window.AeonFB.ready; }
+
+function cloudSync(db) {
+  if (!curUser || !fbReady()) return;
+  // debounce: scrive al massimo ogni 4s
+  if (cloudTimer) return;
+  cloudTimer = setTimeout(async ()=>{
+    cloudTimer = null;
+    try {
+      await window.AeonFB.saveCloud(curUser.uid, {
+        slots: db.slots, current: db.current, nextId: db.nextId,
+        updated: Date.now(),
+      });
+    } catch(e){ console.error("Salvataggio cloud fallito:", e); }
+  }, 4000);
+}
+let DB = loadDB();
+let curSlot = DB.current;
+
+// persist the live state S into its slot
+function save() {
+  if (!S || !curSlot) return;
+  S.lastTick = Date.now();
+  DB.slots[curSlot] = S;
+  DB.current = curSlot;
+  saveDB(DB);
+}
+
+// load a given slot id as the active game
+function loadSlot(id) {
+  const st = DB.slots[id];
+  if (!st) return false;
+  if (!st.workers) st.workers = {};
+  if (st.autoAssign === undefined) st.autoAssign = true;
+  // compatibilità: slot salvati prima dei bot non hanno rivali
+  if (!st.bots) st.bots = makeBots(st.civ, 7);
+  // compatibilità: slot senza nome personalizzato usano il nome della stirpe
+  if (!st.name) { const c = CIVS.find(x=>x.id===st.civ); st.name = c ? c.name : 'Civiltà'; }
+  st.lastTick = Date.now();
+  S = st;
+  curSlot = id;
+  DB.current = id;
+  autoAssignWorkers();
+  saveDB(DB);
+  autoEraNudged = false;
+  hideOverlays();
+  renderAll();
+  return true;
+}
+
+function deleteSlot(id) {
+  delete DB.slots[id];
+  if (curSlot === id) { curSlot = null; S = null; DB.current = null; }
+  saveDB(DB);
+  renderSlots();
+}
+
+function slotCount() { return Object.keys(DB.slots).length; }
+
+/* ============================================================
+   ACCOUNT / AUTENTICAZIONE (Firebase)
+   ============================================================ */
+function authMsg(el, text, kind) {
+  const e = document.getElementById(el);
+  if (!e) return;
+  e.textContent = text || '';
+  e.className = 'auth-msg' + (kind ? ' '+kind : '');
+}
+
+// aggiorna l'aspetto del pulsante header e del pannello in base allo stato
+function refreshAuthUI() {
+  const btn = document.getElementById('accountBtn');
+  const cfg = document.getElementById('authConfig');
+  const form = document.getElementById('authForm');
+  const logged = document.getElementById('authLogged');
+  const note = document.getElementById('authStatusNote');
+  const showCfg = (s)=>{ if(cfg) cfg.style.display = s?'block':'none'; };
+  const showForm = (s)=>{ if(form) form.style.display = s?'block':'none'; };
+  const showLogged = (s)=>{ if(logged) logged.style.display = s?'block':'none'; };
+
+  if (curUser) {
+    // loggato
+    if (btn) btn.textContent = '👤 ' + (curUser.email ? curUser.email.split('@')[0] : 'Account');
+    showCfg(false); showForm(false); showLogged(true);
+    const ue = document.getElementById('authUserEmail');
+    if (ue) ue.textContent = curUser.email || '(utente)';
+  } else if (fbReady()) {
+    // Firebase collegato ma nessun accesso: mostra il login
+    if (btn) btn.textContent = '👤 Accedi';
+    showCfg(false); showForm(true); showLogged(false);
+    if (note) note.textContent = 'Accedi o registrati per salvare nel cloud.';
+  } else {
+    // Firebase non ancora collegato: mostra il form delle credenziali
+    if (btn) btn.textContent = '👤 Accedi';
+    showCfg(true); showForm(false); showLogged(false);
+  }
+}
+
+function openAuth() {
+  refreshAuthUI();
+  authMsg('authMsg',''); authMsg('authMsg2','');
+  document.getElementById('authOverlay').style.display = 'block';
+}
+function closeAuth() {
+  document.getElementById('authOverlay').style.display = 'none';
+  // se non c'è una partita in corso né overlay aperti, porta al punto giusto
+  if (!S) {
+    const slotsOpen = document.getElementById('slotsOverlay').style.display === 'block';
+    const civOpen = document.getElementById('civOverlay').style.display === 'block';
+    if (!slotsOpen && !civOpen) {
+      if (slotCount() > 0) openSlots();
+      else openCivSelect(false);
+    }
+  }
+}
+
+// al login riuscito: carica gli slot dal cloud (se esistono), altrimenti
+// carica sul cloud quelli locali attuali (merge semplice: vince il cloud se presente)
+async function onLoggedIn(user) {
+  curUser = user;
+  refreshAuthUI();
+  if (!fbReady()) return;
+  try {
+    const cloud = await window.AeonFB.loadCloud(user.uid);
+    if (cloud && cloud.slots && Object.keys(cloud.slots).length) {
+      // adotta il salvataggio cloud
+      DB = { slots: cloud.slots, current: cloud.current||null, nextId: cloud.nextId||1 };
+      try { localStorage.setItem(SLOT_KEY, JSON.stringify(DB)); } catch(e){}
+      curSlot = DB.current;
+      if (curSlot && DB.slots[curSlot]) loadSlot(curSlot);
+      else { hideOverlays(); if (slotCount()>0) openSlots(); else openCivSelect(false); }
+      addLog && S && addLog('Partite caricate dal cloud.');
+    } else {
+      // nessun salvataggio cloud: carica lo stato locale corrente
+      await window.AeonFB.saveCloud(user.uid, {
+        slots: DB.slots, current: DB.current, nextId: DB.nextId, updated: Date.now(),
+      });
+    }
+  } catch(e){ console.error('Caricamento cloud fallito:', e); }
+}
+
+async function doLogin() {
+  const email = document.getElementById('authEmail').value.trim();
+  const pass  = document.getElementById('authPass').value;
+  if (!fbReady()) { authMsg('authMsg','Firebase non disponibile. Giochi in locale.', 'err'); return; }
+  if (!email || !pass) { authMsg('authMsg','Inserisci email e password.', 'err'); return; }
+  authMsg('authMsg','Accesso in corso…');
+  try {
+    const cred = await window.AeonFB.signIn(email, pass);
+    authMsg('authMsg','Accesso riuscito.', 'ok');
+    await onLoggedIn(cred.user);
+    setTimeout(closeAuth, 600);
+  } catch(e){ authMsg('authMsg', authErr(e), 'err'); }
+}
+async function doRegister() {
+  const email = document.getElementById('authEmail').value.trim();
+  const pass  = document.getElementById('authPass').value;
+  if (!fbReady()) { authMsg('authMsg','Firebase non disponibile. Giochi in locale.', 'err'); return; }
+  if (!email || !pass) { authMsg('authMsg','Inserisci email e password.', 'err'); return; }
+  if (pass.length < 6) { authMsg('authMsg','La password deve avere almeno 6 caratteri.', 'err'); return; }
+  authMsg('authMsg','Registrazione in corso…');
+  try {
+    const cred = await window.AeonFB.createUser(email, pass);
+    authMsg('authMsg','Account creato.', 'ok');
+    await onLoggedIn(cred.user);
+    setTimeout(closeAuth, 600);
+  } catch(e){ authMsg('authMsg', authErr(e), 'err'); }
+}
+async function doLogout() {
+  if (fbReady()) { try { await window.AeonFB.signOut(); } catch(e){} }
+  curUser = null;
+  refreshAuthUI();
+  authMsg('authMsg2','Sei uscito. Salvataggio locale attivo.', 'ok');
+}
+
+/* ---- Configurazione Firebase (credenziali minime) ---- */
+const FBCONFIG_KEY = 'aeon_fbconfig';
+
+function loadFbConfig() {
+  try { const raw = localStorage.getItem(FBCONFIG_KEY); return raw ? JSON.parse(raw) : null; }
+  catch(e){ return null; }
+}
+function saveFbConfig(cfg) {
+  try { localStorage.setItem(FBCONFIG_KEY, JSON.stringify(cfg)); } catch(e){}
+}
+function clearFbConfig() {
+  try { localStorage.removeItem(FBCONFIG_KEY); } catch(e){}
+}
+// costruisce la config completa dai due campi minimi
+function buildFbConfig(apiKey, projectId) {
+  return {
+    apiKey: apiKey.trim(),
+    projectId: projectId.trim(),
+    authDomain: projectId.trim() + '.firebaseapp.com',
+  };
+}
+// prova a inizializzare Firebase con una config; ritorna true se riuscito
+function applyFbConfig(cfg) {
+  if (!window.AeonFB || !window.AeonFB.sdkLoaded || typeof window.AeonFB.init !== 'function') return false;
+  if (window.AeonFB.ready) return true;
+  const ok = window.AeonFB.init(cfg);
+  if (ok) attachAuthListener();
+  return ok;
+}
+
+// l'utente collega Firebase dal form
+function connectFirebase() {
+  const apiKey = document.getElementById('cfgApiKey').value;
+  const projectId = document.getElementById('cfgProjectId').value;
+  if (!apiKey.trim() || !projectId.trim()) { authMsg('cfgMsg','Inserisci API Key e Project ID.', 'err'); return; }
+  if (!window.AeonFB || !window.AeonFB.sdkLoaded) { authMsg('cfgMsg','SDK Firebase non caricato (serve connessione).', 'err'); return; }
+  const cfg = buildFbConfig(apiKey, projectId);
+  authMsg('cfgMsg','Collegamento in corso…');
+  const ok = applyFbConfig(cfg);
+  if (ok) {
+    saveFbConfig(cfg);
+    authMsg('cfgMsg','Firebase collegato. Ora puoi accedere.', 'ok');
+    setTimeout(refreshAuthUI, 600);
+  } else {
+    authMsg('cfgMsg', 'Collegamento non riuscito: ' + (window.AeonFB.error || 'config non valida.'), 'err');
+  }
+}
+// l'utente sceglie di restare ospite
+function skipFirebase() { closeAuth(); }
+// l'utente vuole cambiare progetto Firebase
+function reconfigFirebase() {
+  clearFbConfig();
+  // se già loggato, esci
+  if (curUser && fbReady()) { try { window.AeonFB.signOut(); } catch(e){} }
+  curUser = null;
+  authMsg('cfgMsg',''); 
+  // nota: il refresh mostrerà il form config solo se Firebase non è ready;
+  // se l'SDK è già inizializzato in pagina, le nuove credenziali avranno
+  // effetto al prossimo ricaricamento della pagina.
+  authMsg('cfgMsg','Credenziali rimosse. Ricarica la pagina per inserirne di nuove.', 'ok');
+  document.getElementById('authConfig').style.display = 'block';
+  document.getElementById('authForm').style.display = 'none';
+}
+
+// traduce gli errori Firebase più comuni in messaggi leggibili
+function authErr(e) {
+  const c = (e && e.code) || '';
+  if (c.includes('invalid-api-key') || c.includes('api-key-not-valid')) return 'API Key non valida. Controlla le credenziali del progetto.';
+  if (c.includes('invalid-email')) return 'Email non valida.';
+  if (c.includes('email-already-in-use')) return 'Email già registrata. Prova ad accedere.';
+  if (c.includes('weak-password')) return 'Password troppo debole (min. 6 caratteri).';
+  if (c.includes('wrong-password') || c.includes('invalid-credential')) return 'Email o password errati.';
+  if (c.includes('user-not-found')) return 'Nessun account con questa email.';
+  if (c.includes('operation-not-allowed')) return 'Email/Password non abilitato nella console Firebase.';
+  if (c.includes('too-many-requests')) return 'Troppi tentativi. Riprova più tardi.';
+  if (c.includes('network')) return 'Errore di rete. Controlla la connessione.';
+  return 'Errore: ' + (e && e.message ? e.message : 'operazione non riuscita.');
+}
+
+// collega l'ascolto dello stato auth (una sola volta)
+let authListenerAttached = false;
+function attachAuthListener() {
+  if (authListenerAttached || !fbReady()) return;
+  authListenerAttached = true;
+  window.AeonFB.onAuth((user)=>{
+    if (user && (!curUser || curUser.uid !== user.uid)) onLoggedIn(user);
+    else if (!user) { curUser = null; refreshAuthUI(); }
+  });
+}
+
+// avvio del ponte: se ci sono credenziali salvate, collega subito Firebase
+function initAuthBridge() {
+  const saved = loadFbConfig();
+  if (saved && saved.apiKey && saved.projectId) {
+    applyFbConfig(saved);
+  }
+  attachAuthListener();
+  refreshAuthUI();
+}
+// il ponte può essere già pronto o arrivare dopo (evento)
+if (window.AeonFB !== undefined && window.AeonFB.sdkLoaded) initAuthBridge();
+else window.addEventListener('aeon-fb-ready', initAuthBridge, { once:true });
+
+/* ============================================================
+   LOOP
+   ============================================================ */
+function gameLoop() {
+  if (S) {
+    const now = Date.now();
+    // niente recupero offline: ogni tick avanza solo del tempo reale del loop,
+    // cappato vicino all'intervallo (100ms) così il tempo trascorso fuori non si accumula.
+    const dt = Math.min((now - S.lastTick)/1000, 0.25);
+    S.lastTick = now;
+    tick(dt);
+    simulateBots(dt);
+    tryAutoEra();
+  }
+}
+let autoEraNudged = false;
+function tryAutoEra() {
+  // don't auto-advance; just nudge log once when ready
+  if (S.era < ERAS.length && eraReqMet() && !autoEraNudged) {
+    autoEraNudged = true;
+    addLog('La tua civiltà è pronta ad avanzare di era!', true);
+  }
+  if (!eraReqMet()) autoEraNudged = false;
+}
+
+/* render throttle */
+let curScreen = 'screen-res';
+function refreshActiveScreen() {
+  if (!S) return;
+  if (curScreen === 'screen-build') renderTab();
+  else if (curScreen === 'screen-tech') renderTech();
+  else if (curScreen === 'screen-craft') renderCrafts();
+  else if (curScreen === 'screen-rank') renderLeaderboard();
+}
+setInterval(()=>{ if(S){ gameLoop(); } }, 100);
+setInterval(()=>{ if(S){ renderResources(); renderEra(); updateBadges(); } }, 300);
+setInterval(()=>{ refreshActiveScreen(); }, 800);
+setInterval(()=>{ if(S){ S.lastTick=Date.now(); save(); } }, 60000);
+
+/* evidenzia i tab quando c'è qualcosa di nuovo acquistabile/ricercabile */
+function updateBadges() {
+  const badgeB = document.getElementById('badgeBuild');
+  const badgeT = document.getElementById('badgeTech');
+  if (!badgeB || !badgeT) return;
+  // edifici costruibili
+  let canBuild = false;
+  for (const b of BUILDINGS) {
+    if (b.era > S.era) continue;
+    if (canAfford(buildingCost(b))) { canBuild = true; break; }
+  }
+  // tecnologie ricercabili
+  let canTech = false;
+  for (const t of TECH) {
+    if (t.era > S.era || S.tech[t.id]) continue;
+    if (canAfford(t.cost)) { canTech = true; break; }
+  }
+  badgeB.classList.toggle('show', canBuild && curScreen !== 'screen-build');
+  badgeT.classList.toggle('show', canTech && curScreen !== 'screen-tech');
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function switchScreen(id) {
+  curScreen = id;
+  document.querySelectorAll('.screen').forEach(s=> s.classList.toggle('active', s.id===id));
+  document.querySelectorAll('.nav-btn').forEach(b=> b.classList.toggle('active', b.dataset.screen===id));
+  window.scrollTo(0,0);
+  refreshActiveScreen();
+}
+document.querySelectorAll('.nav-btn').forEach(b=>{
+  b.onclick = ()=> switchScreen(b.dataset.screen);
+});
+
+document.getElementById('themeBtn').onclick = cycleTheme;
+document.getElementById('saveBtn').onclick = ()=>{ save(); addLog('Partita salvata.'); };
+document.getElementById('slotsBtn').onclick = ()=>{ save(); openSlots(); };
+// account / login
+document.getElementById('accountBtn').onclick = openAuth;
+document.getElementById('authCloseBtn').onclick = closeAuth;
+document.getElementById('authLoginBtn').onclick = doLogin;
+document.getElementById('authRegisterBtn').onclick = doRegister;
+document.getElementById('authLogoutBtn').onclick = doLogout;
+document.getElementById('authPass').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); doLogin(); } });
+// configurazione Firebase (prima volta)
+document.getElementById('cfgConnectBtn').onclick = connectFirebase;
+document.getElementById('cfgSkipBtn').onclick = skipFirebase;
+document.getElementById('authReconfigBtn').onclick = reconfigFirebase;
+document.getElementById('slotsCloseBtn').onclick = ()=>{
+  if (S) hideOverlays();
+  else openCivSelect(false);
+};
+document.getElementById('newGameBtn').onclick = ()=> openCivSelect(true);
+document.getElementById('civBackBtn').onclick = ()=> openSlots();
+
+// pannello nome civiltà
+function confirmStart() {
+  if (!pendingCivId) return;
+  const name = document.getElementById('civNameInput').value;
+  startGame(pendingCivId, name);
+  pendingCivId = null;
+}
+document.getElementById('startGameBtn').onclick = confirmStart;
+document.getElementById('civNameInput').addEventListener('keydown', e=>{
+  if (e.key === 'Enter') { e.preventDefault(); confirmStart(); }
+});
+document.getElementById('namePanelCancel').onclick = ()=>{
+  pendingCivId = null;
+  document.getElementById('namePanel').classList.remove('show');
+  document.querySelectorAll('.civ-card').forEach(c=>c.classList.remove('selected'));
+};
+
+window.tryAdvanceEra = tryAdvanceEra;
+
+// boot
+// Alla primissima apertura, se Firebase non è configurato e non è mai stato
+// chiesto, proponi una volta il collegamento (credenziali minime).
+function maybePromptFirstSetup() {
+  const PROMPT_KEY = 'aeon_fb_prompted';
+  let prompted = false;
+  try { prompted = !!localStorage.getItem(PROMPT_KEY); } catch(e){}
+  const hasConfig = !!loadFbConfig();
+  if (!prompted && !hasConfig) {
+    try { localStorage.setItem(PROMPT_KEY, '1'); } catch(e){}
+    // mostra l'overlay account sul form di configurazione
+    openAuth();
+    return true;
+  }
+  return false;
+}
+
+if (curSlot && DB.slots[curSlot]) {
+  loadSlot(curSlot);
+  maybePromptFirstSetup();
+} else if (slotCount() > 0) {
+  if (!maybePromptFirstSetup()) openSlots();
+} else {
+  if (!maybePromptFirstSetup()) openCivSelect(false);
+}
+</script>
+</body>
+</html>
